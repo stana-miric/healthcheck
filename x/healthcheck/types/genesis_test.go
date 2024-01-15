@@ -22,9 +22,31 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 				PortId: types.PortID,
+				MonitoredChainsList: []types.MonitoredChains{
+					{
+						ChainId: "0",
+					},
+					{
+						ChainId: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated monitoredChains",
+			genState: &types.GenesisState{
+				MonitoredChainsList: []types.MonitoredChains{
+					{
+						ChainId: "0",
+					},
+					{
+						ChainId: "0",
+					},
+				},
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {

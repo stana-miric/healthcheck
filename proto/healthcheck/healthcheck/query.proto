@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package healthcheck.healthcheck;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "healthcheck/healthcheck/params.proto";
+import "healthcheck/healthcheck/monitored_chains.proto";
 
 option go_package = "healthcheck/x/healthcheck/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/healthcheck/healthcheck/params";
+  
+  }
+  
+  // Queries a list of MonitoredChains items.
+  rpc MonitoredChains    (QueryGetMonitoredChainsRequest) returns (QueryGetMonitoredChainsResponse) {
+    option (google.api.http).get = "/healthcheck/healthcheck/monitored_chains/{chainId}";
+  
+  }
+  rpc MonitoredChainsAll (QueryAllMonitoredChainsRequest) returns (QueryAllMonitoredChainsResponse) {
+    option (google.api.http).get = "/healthcheck/healthcheck/monitored_chains";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetMonitoredChainsRequest {
+  string chainId = 1;
+}
+
+message QueryGetMonitoredChainsResponse {
+  MonitoredChains monitoredChains = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMonitoredChainsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMonitoredChainsResponse {
+  repeated MonitoredChains                        monitoredChains = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination      = 2;
+}
+

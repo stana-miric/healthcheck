@@ -1,0 +1,11 @@
+syntax = "proto3";
+package healthcheck.healthcheck;
+
+option go_package = "healthcheck/x/healthcheck/types";
+
+message MonitoredChains {
+  string chainId = 1; 
+  string connectionId = 2; 
+  string creator = 3;
+}
+
