@@ -1,0 +1,11 @@
+syntax = "proto3";
+package healthcheck.types;
+
+option go_package = "healthcheck/x/types";
+
+message HandshakeMetadata {
+  
+  string version = 1; 
+  uint64 updateInterval = 2; 
+  uint64 timeoutInterval = 3; 
+}
