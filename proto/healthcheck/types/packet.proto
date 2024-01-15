@@ -1,0 +1,16 @@
+syntax = "proto3";
+package healthcheck.types;
+
+option go_package = "healthcheck/x/types";
+
+message HealthcheckPacketData {
+    oneof packet {
+        HealthcheckUpdateData healtcheckUpdate = 1;
+    }
+  
+}
+
+message HealthcheckUpdateData {
+    uint64 block=1;
+    uint64 timestamp=2;
+}

@@ -3,6 +3,10 @@ package healthcheck
 import (
 	"fmt"
 
+	"healthcheck/x/healthcheck/keeper"
+	"healthcheck/x/healthcheck/types"
+	packetType "healthcheck/x/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
@@ -10,8 +14,6 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
 	ibcexported "github.com/cosmos/ibc-go/v6/modules/core/exported"
-	"healthcheck/x/healthcheck/keeper"
-	"healthcheck/x/healthcheck/types"
 )
 
 type IBCModule struct {
@@ -142,7 +144,7 @@ func (im IBCModule) OnRecvPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/recv
 
-	var modulePacketData types.HealthcheckPacketData
+	var modulePacketData packetType.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error()))
 	}
@@ -173,7 +175,7 @@ func (im IBCModule) OnAcknowledgementPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/ack
 
-	var modulePacketData types.HealthcheckPacketData
+	var modulePacketData packetType.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
 	}
@@ -222,7 +224,7 @@ func (im IBCModule) OnTimeoutPacket(
 	modulePacket channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) error {
-	var modulePacketData types.HealthcheckPacketData
+	var modulePacketData packetType.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
 	}
