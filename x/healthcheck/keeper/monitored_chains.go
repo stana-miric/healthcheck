@@ -5,6 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // SetMonitoredChain set a specific MonitoredChain in the store from its index
@@ -63,15 +64,59 @@ func (k Keeper) GetAllMonitoredChain(ctx sdk.Context) (list []types.MonitoredCha
 	return
 }
 
-func (k Keeper) StartTrackingMonitoredChain(connectionID string, timeoutInterval, updateInterval uint32) error {
+// SetChainToChannel sets the mapping from a monitored chainID to the channel ID for that monitored chain.
+func (k Keeper) SetChainToChannel(ctx sdk.Context, chainID, channelID string) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainToChannelKeyPrefix))
+	store.Set(types.ChainToChannelKey(
+		chainID,
+	), []byte(channelID))
 
-	// if err := k.UpdateRegisteredChainInterval(connectionID, timeoutInterval, updateInterval); err != nil {
-	// 	return err
-	// }
+	store.Set(types.ChainToChannelKey(chainID), []byte(channelID))
+}
 
-	// if err := k.SetMonitoredChainEntry(); err != nil {
-	// 	return err
-	// }
+// GetChainToChannel gets the channelID for the given moniotred chainID
+func (k Keeper) GetChainToChannel(ctx sdk.Context, chainID string) (string, bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainToChannelKeyPrefix))
+
+	bz := store.Get(types.ChainToChannelKey(
+		chainID,
+	))
+	if bz == nil {
+		return "", false
+	}
+
+	return string(bz), true
+}
+
+func (k Keeper) InitializeMonitoredChain(ctx sdk.Context, connectionID string, timeoutInterval, updateInterval uint32) error {
+
+	chainID, err := k.GetClientChainIdFromConnection(ctx, connectionID)
+	if err != nil {
+		return err
+	}
+
+	chain, found := k.GetMonitoredChain(ctx, chainID)
+
+	if !found {
+		return sdkerrors.Wrapf(types.ErrUnregisteredChain, "chain-id: %s", chainID)
+	}
+
+	if chain.ConnectionId != connectionID {
+		return sdkerrors.Wrapf(types.ErrInvalidConnection, "connection-id: %s", connectionID)
+	}
+
+	var updatedChain = types.MonitoredChain{
+		Creator:         chain.Creator,
+		ChainId:         chain.ChainId,
+		ConnectionId:    chain.ConnectionId,
+		TimeoutInterval: timeoutInterval,
+		UpdateInterval:  updateInterval,
+		Status: &types.MonitoredChainStatus{
+			Status: "inactive",
+		},
+	}
+
+	k.SetMonitoredChain(ctx, updatedChain)
 
 	return nil
 }

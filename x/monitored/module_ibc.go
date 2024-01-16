@@ -75,6 +75,8 @@ func (im IBCModule) OnChanOpenInit(
 		return "", sdkerrors.Wrapf(types.ErrInvalidHandshakeMetadata, "error marshalling ibc-try metadata: %v", err)
 	}
 
+	im.keeper.SetHealthcheckChannel(ctx, channelID)
+
 	return string(mdBz), nil
 }
 
@@ -101,6 +103,12 @@ func (im IBCModule) OnChanOpenAck(
 	_,
 	counterpartyVersion string,
 ) error {
+	// Require portID is the portID module is bound to
+	boundPort := im.keeper.GetPort(ctx)
+	if boundPort != portID {
+		return sdkerrors.Wrapf(porttypes.ErrInvalidPort, "invalid port: %s, expected %s", portID, boundPort)
+	}
+
 	if counterpartyVersion != commonTypes.Version {
 		return sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: %s, expected %s", counterpartyVersion, commonTypes.Version)
 	}

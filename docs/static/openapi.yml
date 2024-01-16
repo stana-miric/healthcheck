@@ -33895,6 +33895,19 @@ paths:
                     updateInterval:
                       type: integer
                       format: int64
+                    status:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        timestamp:
+                          type: string
+                        block:
+                          type: integer
+                          format: int64
+                        registryBlockHeight:
+                          type: integer
+                          format: int64
               pagination:
                 type: object
                 properties:
@@ -34025,6 +34038,19 @@ paths:
                   updateInterval:
                     type: integer
                     format: int64
+                  status:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                      timestamp:
+                        type: string
+                      block:
+                        type: integer
+                        format: int64
+                      registryBlockHeight:
+                        type: integer
+                        format: int64
         default:
           description: An unexpected error response.
           schema:
@@ -70351,6 +70377,32 @@ definitions:
       updateInterval:
         type: integer
         format: int64
+      status:
+        type: object
+        properties:
+          status:
+            type: string
+          timestamp:
+            type: string
+          block:
+            type: integer
+            format: int64
+          registryBlockHeight:
+            type: integer
+            format: int64
+  healthcheck.healthcheck.MonitoredChainStatus:
+    type: object
+    properties:
+      status:
+        type: string
+      timestamp:
+        type: string
+      block:
+        type: integer
+        format: int64
+      registryBlockHeight:
+        type: integer
+        format: int64
   healthcheck.healthcheck.MsgCreateMonitoredChainResponse:
     type: object
   healthcheck.healthcheck.MsgDeleteMonitoredChainResponse:
@@ -70380,6 +70432,19 @@ definitions:
             updateInterval:
               type: integer
               format: int64
+            status:
+              type: object
+              properties:
+                status:
+                  type: string
+                timestamp:
+                  type: string
+                block:
+                  type: integer
+                  format: int64
+                registryBlockHeight:
+                  type: integer
+                  format: int64
       pagination:
         type: object
         properties:
@@ -70424,6 +70489,19 @@ definitions:
           updateInterval:
             type: integer
             format: int64
+          status:
+            type: object
+            properties:
+              status:
+                type: string
+              timestamp:
+                type: string
+              block:
+                type: integer
+                format: int64
+              registryBlockHeight:
+                type: integer
+                format: int64
   healthcheck.healthcheck.QueryParamsResponse:
     type: object
     properties:

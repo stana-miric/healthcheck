@@ -15,7 +15,9 @@ import (
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	typesparams "github.com/cosmos/cosmos-sdk/x/params/types"
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
+	conntypes "github.com/cosmos/ibc-go/v6/modules/core/03-connection/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
+	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -49,11 +51,29 @@ func (healthcheckChannelKeeper) ChanCloseInit(ctx sdk.Context, portID, channelID
 	return nil
 }
 
+func (healthcheckChannelKeeper) GetChannelClientState(ctx sdk.Context, portID, channelID string) (string, exported.ClientState, error) {
+	return "", nil, nil
+}
+
 // healthcheckportKeeper is a stub of cosmosibckeeper.PortKeeper
 type healthcheckPortKeeper struct{}
 
 func (healthcheckPortKeeper) BindPort(ctx sdk.Context, portID string) *capabilitytypes.Capability {
 	return &capabilitytypes.Capability{}
+}
+
+// healthcheckConnectionKeeper is a stub of cosmosibckeeper.ConnectionKeeper
+type healthcheckConnectionKeeper struct{}
+
+func (healthcheckConnectionKeeper) GetConnection(ctx sdk.Context, connectionID string) (conntypes.ConnectionEnd, bool) {
+	return conntypes.ConnectionEnd{}, false
+}
+
+// healthcheckClientKeeper is a stub of cosmosibckeeper.Client
+type healthcheckClientKeeper struct{}
+
+func (healthcheckClientKeeper) GetClientState(ctx sdk.Context, clientID string) (exported.ClientState, bool) {
+	return nil, false
 }
 
 func HealthcheckKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
@@ -85,6 +105,8 @@ func HealthcheckKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		paramsSubspace,
 		healthcheckChannelKeeper{},
 		healthcheckPortKeeper{},
+		healthcheckConnectionKeeper{},
+		healthcheckClientKeeper{},
 		capabilityKeeper.ScopeToModule("HealthcheckScopedKeeper"),
 	)
 

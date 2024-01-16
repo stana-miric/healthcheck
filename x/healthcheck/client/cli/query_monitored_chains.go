@@ -13,7 +13,7 @@ import (
 func CmdListMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-monitored-chains",
-		Short: "list all MonitoredChain",
+		Short: "list all MonitoredChains",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 

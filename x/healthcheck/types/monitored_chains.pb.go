@@ -23,11 +23,12 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MonitoredChain struct {
-	ChainId         string `protobuf:"bytes,1,opt,name=chainId,proto3" json:"chainId,omitempty"`
-	ConnectionId    string `protobuf:"bytes,2,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
-	Creator         string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
-	TimeoutInterval uint32 `protobuf:"varint,4,opt,name=timeoutInterval,proto3" json:"timeoutInterval,omitempty"`
-	UpdateInterval  uint32 `protobuf:"varint,5,opt,name=updateInterval,proto3" json:"updateInterval,omitempty"`
+	ChainId         string                `protobuf:"bytes,1,opt,name=chainId,proto3" json:"chainId,omitempty"`
+	ConnectionId    string                `protobuf:"bytes,2,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
+	Creator         string                `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+	TimeoutInterval uint32                `protobuf:"varint,4,opt,name=timeoutInterval,proto3" json:"timeoutInterval,omitempty"`
+	UpdateInterval  uint32                `protobuf:"varint,5,opt,name=updateInterval,proto3" json:"updateInterval,omitempty"`
+	Status          *MonitoredChainStatus `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (m *MonitoredChain) Reset()         { *m = MonitoredChain{} }
@@ -98,8 +99,84 @@ func (m *MonitoredChain) GetUpdateInterval() uint32 {
 	return 0
 }
 
+func (m *MonitoredChain) GetStatus() *MonitoredChainStatus {
+	if m != nil {
+		return m.Status
+	}
+	return nil
+}
+
+type MonitoredChainStatus struct {
+	Status              string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	Timestamp           string `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Block               uint32 `protobuf:"varint,3,opt,name=block,proto3" json:"block,omitempty"`
+	RegistryBlockHeight uint32 `protobuf:"varint,4,opt,name=registryBlockHeight,proto3" json:"registryBlockHeight,omitempty"`
+}
+
+func (m *MonitoredChainStatus) Reset()         { *m = MonitoredChainStatus{} }
+func (m *MonitoredChainStatus) String() string { return proto.CompactTextString(m) }
+func (*MonitoredChainStatus) ProtoMessage()    {}
+func (*MonitoredChainStatus) Descriptor() ([]byte, []int) {
+	return fileDescriptor_9d374112fcac9bc6, []int{1}
+}
+func (m *MonitoredChainStatus) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MonitoredChainStatus) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MonitoredChainStatus.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MonitoredChainStatus) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MonitoredChainStatus.Merge(m, src)
+}
+func (m *MonitoredChainStatus) XXX_Size() int {
+	return m.Size()
+}
+func (m *MonitoredChainStatus) XXX_DiscardUnknown() {
+	xxx_messageInfo_MonitoredChainStatus.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MonitoredChainStatus proto.InternalMessageInfo
+
+func (m *MonitoredChainStatus) GetStatus() string {
+	if m != nil {
+		return m.Status
+	}
+	return ""
+}
+
+func (m *MonitoredChainStatus) GetTimestamp() string {
+	if m != nil {
+		return m.Timestamp
+	}
+	return ""
+}
+
+func (m *MonitoredChainStatus) GetBlock() uint32 {
+	if m != nil {
+		return m.Block
+	}
+	return 0
+}
+
+func (m *MonitoredChainStatus) GetRegistryBlockHeight() uint32 {
+	if m != nil {
+		return m.RegistryBlockHeight
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*MonitoredChain)(nil), "healthcheck.healthcheck.MonitoredChain")
+	proto.RegisterType((*MonitoredChainStatus)(nil), "healthcheck.healthcheck.MonitoredChainStatus")
 }
 
 func init() {
@@ -107,21 +184,27 @@ func init() {
 }
 
 var fileDescriptor_9d374112fcac9bc6 = []byte{
-	// 220 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0xcb, 0x48, 0x4d, 0xcc,
-	0x29, 0xc9, 0x48, 0xce, 0x48, 0x4d, 0xce, 0xd6, 0x47, 0x66, 0xe7, 0xe6, 0xe7, 0x65, 0x96, 0xe4,
-	0x17, 0xa5, 0xa6, 0xc4, 0x27, 0x67, 0x24, 0x66, 0xe6, 0x15, 0xeb, 0x15, 0x14, 0xe5, 0x97, 0xe4,
-	0x0b, 0x89, 0x23, 0xa9, 0x41, 0xd6, 0xab, 0xb4, 0x8b, 0x91, 0x8b, 0xcf, 0x17, 0xa6, 0xc7, 0x19,
-	0xa4, 0x45, 0x48, 0x82, 0x8b, 0x1d, 0xac, 0xd7, 0x33, 0x45, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33,
-	0x08, 0xc6, 0x15, 0x52, 0xe2, 0xe2, 0x49, 0xce, 0xcf, 0xcb, 0x4b, 0x4d, 0x2e, 0xc9, 0xcc, 0x07,
-	0x49, 0x33, 0x81, 0xa5, 0x51, 0xc4, 0xc0, 0xba, 0x8b, 0x52, 0x13, 0x4b, 0xf2, 0x8b, 0x24, 0x98,
-	0xa1, 0xba, 0x21, 0x5c, 0x21, 0x0d, 0x2e, 0xfe, 0x92, 0xcc, 0xdc, 0xd4, 0xfc, 0xd2, 0x12, 0xcf,
-	0xbc, 0x92, 0xd4, 0xa2, 0xb2, 0xc4, 0x1c, 0x09, 0x16, 0x05, 0x46, 0x0d, 0xde, 0x20, 0x74, 0x61,
-	0x21, 0x35, 0x2e, 0xbe, 0xd2, 0x82, 0x94, 0xc4, 0x92, 0x54, 0xb8, 0x42, 0x56, 0xb0, 0x42, 0x34,
-	0x51, 0x27, 0xcb, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71,
-	0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x88, 0x92, 0x47, 0x0e,
-	0x93, 0x0a, 0x94, 0x10, 0x2a, 0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0x87, 0x8b, 0x31, 0x20,
-	0x00, 0x00, 0xff, 0xff, 0x71, 0x46, 0xaa, 0x5c, 0x49, 0x01, 0x00, 0x00,
+	// 319 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0x31, 0x4f, 0xc3, 0x30,
+	0x10, 0x85, 0xeb, 0x42, 0x8b, 0x6a, 0x68, 0x91, 0x4c, 0x05, 0x19, 0x90, 0xa9, 0x3a, 0xa0, 0x2c,
+	0x04, 0x04, 0x13, 0x6b, 0x11, 0x12, 0x1d, 0x58, 0xc2, 0xc6, 0x82, 0x5c, 0xd7, 0x6a, 0xac, 0xb6,
+	0x71, 0x64, 0x5f, 0x10, 0x1d, 0xf9, 0x07, 0x0c, 0xfc, 0x28, 0xc6, 0x8e, 0x8c, 0x28, 0xf9, 0x23,
+	0x28, 0x4e, 0x5a, 0x92, 0xaa, 0x6c, 0x79, 0xef, 0xde, 0x17, 0xf9, 0xee, 0x61, 0x2f, 0x10, 0x6c,
+	0x06, 0x01, 0x0f, 0x04, 0x9f, 0x5e, 0x96, 0xbf, 0xe7, 0x2a, 0x94, 0xa0, 0xb4, 0x18, 0xbf, 0xf0,
+	0x80, 0xc9, 0xd0, 0x78, 0x91, 0x56, 0xa0, 0xc8, 0x49, 0x29, 0x53, 0x66, 0xfb, 0xef, 0x75, 0xdc,
+	0x79, 0x5c, 0x31, 0x77, 0x19, 0x42, 0x1c, 0xbc, 0x67, 0xd9, 0xe1, 0xd8, 0x41, 0x3d, 0xe4, 0xb6,
+	0xfc, 0x95, 0x24, 0x7d, 0x7c, 0xc0, 0x55, 0x18, 0x0a, 0x0e, 0x52, 0x65, 0xe3, 0xba, 0x1d, 0x57,
+	0x3c, 0x4b, 0x6b, 0xc1, 0x40, 0x69, 0x67, 0xa7, 0xa0, 0x73, 0x49, 0x5c, 0x7c, 0x08, 0x72, 0x2e,
+	0x54, 0x0c, 0xc3, 0x10, 0x84, 0x7e, 0x65, 0x33, 0x67, 0xb7, 0x87, 0xdc, 0xb6, 0xbf, 0x69, 0x93,
+	0x73, 0xdc, 0x89, 0xa3, 0x31, 0x03, 0xb1, 0x0e, 0x36, 0x6c, 0x70, 0xc3, 0x25, 0xf7, 0xb8, 0x69,
+	0x80, 0x41, 0x6c, 0x9c, 0x66, 0x0f, 0xb9, 0xfb, 0xd7, 0x17, 0xde, 0x3f, 0x6b, 0x7a, 0xd5, 0x15,
+	0x9f, 0x2c, 0xe4, 0x17, 0x70, 0xff, 0x13, 0xe1, 0xee, 0xb6, 0x00, 0x39, 0x5e, 0xff, 0x3f, 0x3f,
+	0x44, 0xa1, 0xc8, 0x29, 0x6e, 0x65, 0x4f, 0x36, 0xc0, 0xe6, 0x51, 0x71, 0x84, 0x3f, 0x83, 0x74,
+	0x71, 0x63, 0x34, 0x53, 0x7c, 0x6a, 0xf7, 0x6f, 0xfb, 0xb9, 0x20, 0x57, 0xf8, 0x48, 0x8b, 0x89,
+	0x34, 0xa0, 0x17, 0x83, 0xcc, 0x78, 0x10, 0x72, 0x12, 0x40, 0x71, 0x81, 0x6d, 0xa3, 0xc1, 0xed,
+	0x57, 0x42, 0xd1, 0x32, 0xa1, 0xe8, 0x27, 0xa1, 0xe8, 0x23, 0xa5, 0xb5, 0x65, 0x4a, 0x6b, 0xdf,
+	0x29, 0xad, 0x3d, 0x9f, 0x95, 0x1b, 0x7f, 0xab, 0xf4, 0x0f, 0x8b, 0x48, 0x98, 0x51, 0xd3, 0xb6,
+	0x7e, 0xf3, 0x1b, 0x00, 0x00, 0xff, 0xff, 0xbe, 0xf8, 0xcb, 0x35, 0x27, 0x02, 0x00, 0x00,
 }
 
 func (m *MonitoredChain) Marshal() (dAtA []byte, err error) {
@@ -144,6 +227,18 @@ func (m *MonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Status != nil {
+		{
+			size, err := m.Status.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintMonitoredChains(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x32
+	}
 	if m.UpdateInterval != 0 {
 		i = encodeVarintMonitoredChains(dAtA, i, uint64(m.UpdateInterval))
 		i--
@@ -172,6 +267,53 @@ func (m *MonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i -= len(m.ChainId)
 		copy(dAtA[i:], m.ChainId)
 		i = encodeVarintMonitoredChains(dAtA, i, uint64(len(m.ChainId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MonitoredChainStatus) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MonitoredChainStatus) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MonitoredChainStatus) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.RegistryBlockHeight != 0 {
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(m.RegistryBlockHeight))
+		i--
+		dAtA[i] = 0x20
+	}
+	if m.Block != 0 {
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(m.Block))
+		i--
+		dAtA[i] = 0x18
+	}
+	if len(m.Timestamp) > 0 {
+		i -= len(m.Timestamp)
+		copy(dAtA[i:], m.Timestamp)
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(len(m.Timestamp)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Status) > 0 {
+		i -= len(m.Status)
+		copy(dAtA[i:], m.Status)
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(len(m.Status)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -212,6 +354,33 @@ func (m *MonitoredChain) Size() (n int) {
 	}
 	if m.UpdateInterval != 0 {
 		n += 1 + sovMonitoredChains(uint64(m.UpdateInterval))
+	}
+	if m.Status != nil {
+		l = m.Status.Size()
+		n += 1 + l + sovMonitoredChains(uint64(l))
+	}
+	return n
+}
+
+func (m *MonitoredChainStatus) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Status)
+	if l > 0 {
+		n += 1 + l + sovMonitoredChains(uint64(l))
+	}
+	l = len(m.Timestamp)
+	if l > 0 {
+		n += 1 + l + sovMonitoredChains(uint64(l))
+	}
+	if m.Block != 0 {
+		n += 1 + sovMonitoredChains(uint64(m.Block))
+	}
+	if m.RegistryBlockHeight != 0 {
+		n += 1 + sovMonitoredChains(uint64(m.RegistryBlockHeight))
 	}
 	return n
 }
@@ -381,6 +550,194 @@ func (m *MonitoredChain) Unmarshal(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.UpdateInterval |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Status == nil {
+				m.Status = &MonitoredChainStatus{}
+			}
+			if err := m.Status.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipMonitoredChains(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MonitoredChainStatus) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowMonitoredChains
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MonitoredChainStatus: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MonitoredChainStatus: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Status", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Status = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Timestamp", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthMonitoredChains
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Timestamp = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Block", wireType)
+			}
+			m.Block = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Block |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryBlockHeight", wireType)
+			}
+			m.RegistryBlockHeight = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.RegistryBlockHeight |= uint32(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

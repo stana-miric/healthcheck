@@ -12,6 +12,7 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
+	ibctm "github.com/cosmos/ibc-go/v6/modules/light-clients/07-tendermint/types"
 	"github.com/tendermint/tendermint/libs/log"
 
 	"healthcheck/x/healthcheck/types"
@@ -24,9 +25,11 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
-		channelKeeper types.ChannelKeeper
-		portKeeper    types.PortKeeper
-		scopedKeeper  exported.ScopedKeeper
+		channelKeeper    types.ChannelKeeper
+		portKeeper       types.PortKeeper
+		connectionKeeper types.ConnectionKeeper
+		clientKeeper     types.ClientKeeper
+		scopedKeeper     exported.ScopedKeeper
 	}
 )
 
@@ -37,6 +40,8 @@ func NewKeeper(
 	ps paramtypes.Subspace,
 	channelKeeper types.ChannelKeeper,
 	portKeeper types.PortKeeper,
+	connectionKeeper types.ConnectionKeeper,
+	clientKeeper types.ClientKeeper,
 	scopedKeeper exported.ScopedKeeper,
 
 ) *Keeper {
@@ -51,9 +56,11 @@ func NewKeeper(
 		memKey:     memKey,
 		paramstore: ps,
 
-		channelKeeper: channelKeeper,
-		portKeeper:    portKeeper,
-		scopedKeeper:  scopedKeeper,
+		channelKeeper:    channelKeeper,
+		portKeeper:       portKeeper,
+		connectionKeeper: connectionKeeper,
+		clientKeeper:     clientKeeper,
+		scopedKeeper:     scopedKeeper,
 	}
 }
 
@@ -109,4 +116,29 @@ func (k Keeper) ClaimCapability(ctx sdk.Context, cap *capabilitytypes.Capability
 
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
+}
+
+func (k Keeper) GetClientChainIdFromChannel(ctx sdk.Context, channelID string) (string, error) {
+	channel, ok := k.channelKeeper.GetChannel(ctx, k.GetPort(ctx), channelID)
+	if !ok {
+		return "", sdkerrors.Wrapf(types.ErrChannelNotFound, "channel not found for channel ID: %s", channelID)
+	}
+
+	return k.GetClientChainIdFromConnection(ctx, channel.ConnectionHops[0])
+
+}
+
+func (k Keeper) GetClientChainIdFromConnection(ctx sdk.Context, connectionID string) (string, error) {
+	connection, found := k.connectionKeeper.GetConnection(ctx, connectionID)
+	if !found {
+		return "", sdkerrors.Wrapf(types.ErrInvalidConnection, "connection-id: %s", connectionID)
+	}
+
+	clientState, found := k.clientKeeper.GetClientState(ctx, connection.ClientId)
+	if !found {
+		return "", sdkerrors.Wrapf(types.ErrInvalidClient, "client-id: %s", connection.ClientId)
+	}
+
+	chainID := clientState.(*ibctm.ClientState).ChainId
+	return chainID, nil
 }

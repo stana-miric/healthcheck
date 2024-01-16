@@ -73,7 +73,7 @@ func (im IBCModule) OnChanOpenTry(
 		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: got: %s, expected %s", md.Version, commonTypes.Version)
 	}
 
-	if err := im.keeper.StartTrackingMonitoredChain(connectionHops[0], md.TimeoutInterval, md.UpdateInterval); err != nil {
+	if err := im.keeper.InitializeMonitoredChain(ctx, connectionHops[0], md.TimeoutInterval, md.UpdateInterval); err != nil {
 		return "", err
 	}
 
@@ -101,6 +101,15 @@ func (im IBCModule) OnChanOpenConfirm(
 	portID,
 	channelID string,
 ) error {
+
+	chainID, err := im.keeper.GetClientChainIdFromChannel(ctx, channelID)
+	if err != nil {
+		return err
+	}
+
+	// monitored chain id to channel id map is saved to be able to close the channel on chain healthcheck timeout
+	im.keeper.SetChainToChannel(ctx, chainID, channelID)
+
 	return nil
 }
 

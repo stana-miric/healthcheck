@@ -57,6 +57,18 @@ func NewKeeper(
 	}
 }
 
+// SetHealthcheckChannel sets the channelID for the channel to the healtcheck.
+func (k Keeper) GetHealthcheckChannel(ctx sdk.Context) string {
+	store := ctx.KVStore(k.storeKey)
+	return string(store.Get(types.HealthcheckChannelKey))
+}
+
+// SetPort sets the portID for the IBC app module. Used in InitGenesis
+func (k Keeper) SetHealthcheckChannel(ctx sdk.Context, channelID string) {
+	store := ctx.KVStore(k.storeKey)
+	store.Set(types.HealthcheckChannelKey, []byte(channelID))
+}
+
 // ----------------------------------------------------------------------------
 // IBC Keeper Logic
 // ----------------------------------------------------------------------------
