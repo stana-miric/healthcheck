@@ -3,8 +3,10 @@ package types_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	"healthcheck/x/healthcheck/types"
+	commonTypes "healthcheck/x/types"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
@@ -21,8 +23,8 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
-				PortId: types.PortID,
-				MonitoredChainsList: []types.MonitoredChains{
+				PortId: commonTypes.HealthcheckPortID,
+				MonitoredChainList: []types.MonitoredChain{
 					{
 						ChainId: "0",
 					},
@@ -35,9 +37,9 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: true,
 		},
 		{
-			desc: "duplicated monitoredChains",
+			desc: "duplicated MonitoredChain",
 			genState: &types.GenesisState{
-				MonitoredChainsList: []types.MonitoredChains{
+				MonitoredChainList: []types.MonitoredChain{
 					{
 						ChainId: "0",
 					},

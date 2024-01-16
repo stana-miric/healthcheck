@@ -1,16 +1,17 @@
 package healthcheck
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"healthcheck/x/healthcheck/keeper"
 	"healthcheck/x/healthcheck/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
-	// Set all the monitoredChains
-	for _, elem := range genState.MonitoredChainsList {
-		k.SetMonitoredChains(ctx, elem)
+	// Set all the MonitoredChain
+	for _, elem := range genState.MonitoredChainList {
+		k.SetMonitoredChain(ctx, elem)
 	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
@@ -33,7 +34,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.Params = k.GetParams(ctx)
 
 	genesis.PortId = k.GetPort(ctx)
-	genesis.MonitoredChainsList = k.GetAllMonitoredChains(ctx)
+	genesis.MonitoredChainList = k.GetAllMonitoredChain(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

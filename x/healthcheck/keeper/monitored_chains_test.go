@@ -4,32 +4,33 @@ import (
 	"strconv"
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/stretchr/testify/require"
 	keepertest "healthcheck/testutil/keeper"
 	"healthcheck/testutil/nullify"
 	"healthcheck/x/healthcheck/keeper"
 	"healthcheck/x/healthcheck/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/stretchr/testify/require"
 )
 
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNMonitoredChains(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.MonitoredChains {
-	items := make([]types.MonitoredChains, n)
+func createNMonitoredChain(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.MonitoredChain {
+	items := make([]types.MonitoredChain, n)
 	for i := range items {
 		items[i].ChainId = strconv.Itoa(i)
 
-		keeper.SetMonitoredChains(ctx, items[i])
+		keeper.SetMonitoredChain(ctx, items[i])
 	}
 	return items
 }
 
-func TestMonitoredChainsGet(t *testing.T) {
+func TestMonitoredChainGet(t *testing.T) {
 	keeper, ctx := keepertest.HealthcheckKeeper(t)
-	items := createNMonitoredChains(keeper, ctx, 10)
+	items := createNMonitoredChain(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetMonitoredChains(ctx,
+		rst, found := keeper.GetMonitoredChain(ctx,
 			item.ChainId,
 		)
 		require.True(t, found)
@@ -39,25 +40,25 @@ func TestMonitoredChainsGet(t *testing.T) {
 		)
 	}
 }
-func TestMonitoredChainsRemove(t *testing.T) {
+func TestMonitoredChainRemove(t *testing.T) {
 	keeper, ctx := keepertest.HealthcheckKeeper(t)
-	items := createNMonitoredChains(keeper, ctx, 10)
+	items := createNMonitoredChain(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveMonitoredChains(ctx,
+		keeper.RemoveMonitoredChain(ctx,
 			item.ChainId,
 		)
-		_, found := keeper.GetMonitoredChains(ctx,
+		_, found := keeper.GetMonitoredChain(ctx,
 			item.ChainId,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestMonitoredChainsGetAll(t *testing.T) {
+func TestMonitoredChainGetAll(t *testing.T) {
 	keeper, ctx := keepertest.HealthcheckKeeper(t)
-	items := createNMonitoredChains(keeper, ctx, 10)
+	items := createNMonitoredChain(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllMonitoredChains(ctx)),
+		nullify.Fill(keeper.GetAllMonitoredChain(ctx)),
 	)
 }

@@ -22,24 +22,26 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MonitoredChains struct {
-	ChainId      string `protobuf:"bytes,1,opt,name=chainId,proto3" json:"chainId,omitempty"`
-	ConnectionId string `protobuf:"bytes,2,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
-	Creator      string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+type MonitoredChain struct {
+	ChainId         string `protobuf:"bytes,1,opt,name=chainId,proto3" json:"chainId,omitempty"`
+	ConnectionId    string `protobuf:"bytes,2,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
+	Creator         string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+	TimeoutInterval uint32 `protobuf:"varint,4,opt,name=timeoutInterval,proto3" json:"timeoutInterval,omitempty"`
+	UpdateInterval  uint32 `protobuf:"varint,5,opt,name=updateInterval,proto3" json:"updateInterval,omitempty"`
 }
 
-func (m *MonitoredChains) Reset()         { *m = MonitoredChains{} }
-func (m *MonitoredChains) String() string { return proto.CompactTextString(m) }
-func (*MonitoredChains) ProtoMessage()    {}
-func (*MonitoredChains) Descriptor() ([]byte, []int) {
+func (m *MonitoredChain) Reset()         { *m = MonitoredChain{} }
+func (m *MonitoredChain) String() string { return proto.CompactTextString(m) }
+func (*MonitoredChain) ProtoMessage()    {}
+func (*MonitoredChain) Descriptor() ([]byte, []int) {
 	return fileDescriptor_9d374112fcac9bc6, []int{0}
 }
-func (m *MonitoredChains) XXX_Unmarshal(b []byte) error {
+func (m *MonitoredChain) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MonitoredChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MonitoredChains.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MonitoredChain.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -49,41 +51,55 @@ func (m *MonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
-func (m *MonitoredChains) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MonitoredChains.Merge(m, src)
+func (m *MonitoredChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MonitoredChain.Merge(m, src)
 }
-func (m *MonitoredChains) XXX_Size() int {
+func (m *MonitoredChain) XXX_Size() int {
 	return m.Size()
 }
-func (m *MonitoredChains) XXX_DiscardUnknown() {
-	xxx_messageInfo_MonitoredChains.DiscardUnknown(m)
+func (m *MonitoredChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MonitoredChain.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MonitoredChains proto.InternalMessageInfo
+var xxx_messageInfo_MonitoredChain proto.InternalMessageInfo
 
-func (m *MonitoredChains) GetChainId() string {
+func (m *MonitoredChain) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-func (m *MonitoredChains) GetConnectionId() string {
+func (m *MonitoredChain) GetConnectionId() string {
 	if m != nil {
 		return m.ConnectionId
 	}
 	return ""
 }
 
-func (m *MonitoredChains) GetCreator() string {
+func (m *MonitoredChain) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
+func (m *MonitoredChain) GetTimeoutInterval() uint32 {
+	if m != nil {
+		return m.TimeoutInterval
+	}
+	return 0
+}
+
+func (m *MonitoredChain) GetUpdateInterval() uint32 {
+	if m != nil {
+		return m.UpdateInterval
+	}
+	return 0
+}
+
 func init() {
-	proto.RegisterType((*MonitoredChains)(nil), "healthcheck.healthcheck.MonitoredChains")
+	proto.RegisterType((*MonitoredChain)(nil), "healthcheck.healthcheck.MonitoredChain")
 }
 
 func init() {
@@ -91,21 +107,24 @@ func init() {
 }
 
 var fileDescriptor_9d374112fcac9bc6 = []byte{
-	// 174 bytes of a gzipped FileDescriptorProto
+	// 220 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0xcb, 0x48, 0x4d, 0xcc,
 	0x29, 0xc9, 0x48, 0xce, 0x48, 0x4d, 0xce, 0xd6, 0x47, 0x66, 0xe7, 0xe6, 0xe7, 0x65, 0x96, 0xe4,
 	0x17, 0xa5, 0xa6, 0xc4, 0x27, 0x67, 0x24, 0x66, 0xe6, 0x15, 0xeb, 0x15, 0x14, 0xe5, 0x97, 0xe4,
-	0x0b, 0x89, 0x23, 0xa9, 0x41, 0xd6, 0xab, 0x94, 0xc9, 0xc5, 0xef, 0x0b, 0xd3, 0xe2, 0x0c, 0xd6,
-	0x21, 0x24, 0xc1, 0xc5, 0x0e, 0xd6, 0xeb, 0x99, 0x22, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04,
-	0xe3, 0x0a, 0x29, 0x71, 0xf1, 0x24, 0xe7, 0xe7, 0xe5, 0xa5, 0x26, 0x97, 0x64, 0xe6, 0x83, 0xa4,
-	0x99, 0xc0, 0xd2, 0x28, 0x62, 0x60, 0xdd, 0x45, 0xa9, 0x89, 0x25, 0xf9, 0x45, 0x12, 0xcc, 0x50,
-	0xdd, 0x10, 0xae, 0x93, 0xe5, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24,
-	0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0xc9,
-	0x23, 0xfb, 0xa0, 0x02, 0xc5, 0x3f, 0x25, 0x95, 0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60, 0x5f, 0x18,
-	0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x98, 0xb5, 0x36, 0x63, 0xf7, 0x00, 0x00, 0x00,
+	0x0b, 0x89, 0x23, 0xa9, 0x41, 0xd6, 0xab, 0xb4, 0x8b, 0x91, 0x8b, 0xcf, 0x17, 0xa6, 0xc7, 0x19,
+	0xa4, 0x45, 0x48, 0x82, 0x8b, 0x1d, 0xac, 0xd7, 0x33, 0x45, 0x82, 0x51, 0x81, 0x51, 0x83, 0x33,
+	0x08, 0xc6, 0x15, 0x52, 0xe2, 0xe2, 0x49, 0xce, 0xcf, 0xcb, 0x4b, 0x4d, 0x2e, 0xc9, 0xcc, 0x07,
+	0x49, 0x33, 0x81, 0xa5, 0x51, 0xc4, 0xc0, 0xba, 0x8b, 0x52, 0x13, 0x4b, 0xf2, 0x8b, 0x24, 0x98,
+	0xa1, 0xba, 0x21, 0x5c, 0x21, 0x0d, 0x2e, 0xfe, 0x92, 0xcc, 0xdc, 0xd4, 0xfc, 0xd2, 0x12, 0xcf,
+	0xbc, 0x92, 0xd4, 0xa2, 0xb2, 0xc4, 0x1c, 0x09, 0x16, 0x05, 0x46, 0x0d, 0xde, 0x20, 0x74, 0x61,
+	0x21, 0x35, 0x2e, 0xbe, 0xd2, 0x82, 0x94, 0xc4, 0x92, 0x54, 0xb8, 0x42, 0x56, 0xb0, 0x42, 0x34,
+	0x51, 0x27, 0xcb, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71,
+	0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96, 0x63, 0x88, 0x92, 0x47, 0x0e,
+	0x93, 0x0a, 0x94, 0x10, 0x2a, 0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62, 0x03, 0x87, 0x8b, 0x31, 0x20,
+	0x00, 0x00, 0xff, 0xff, 0x71, 0x46, 0xaa, 0x5c, 0x49, 0x01, 0x00, 0x00,
 }
 
-func (m *MonitoredChains) Marshal() (dAtA []byte, err error) {
+func (m *MonitoredChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -115,16 +134,26 @@ func (m *MonitoredChains) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MonitoredChains) MarshalTo(dAtA []byte) (int, error) {
+func (m *MonitoredChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
+	if m.UpdateInterval != 0 {
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(m.UpdateInterval))
+		i--
+		dAtA[i] = 0x28
+	}
+	if m.TimeoutInterval != 0 {
+		i = encodeVarintMonitoredChains(dAtA, i, uint64(m.TimeoutInterval))
+		i--
+		dAtA[i] = 0x20
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -160,7 +189,7 @@ func encodeVarintMonitoredChains(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MonitoredChains) Size() (n int) {
+func (m *MonitoredChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -178,6 +207,12 @@ func (m *MonitoredChains) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovMonitoredChains(uint64(l))
 	}
+	if m.TimeoutInterval != 0 {
+		n += 1 + sovMonitoredChains(uint64(m.TimeoutInterval))
+	}
+	if m.UpdateInterval != 0 {
+		n += 1 + sovMonitoredChains(uint64(m.UpdateInterval))
+	}
 	return n
 }
 
@@ -187,7 +222,7 @@ func sovMonitoredChains(x uint64) (n int) {
 func sozMonitoredChains(x uint64) (n int) {
 	return sovMonitoredChains(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MonitoredChains) Unmarshal(dAtA []byte) error {
+func (m *MonitoredChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -210,10 +245,10 @@ func (m *MonitoredChains) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MonitoredChains: wiretype end group for non-group")
+			return fmt.Errorf("proto: MonitoredChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MonitoredChains: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MonitoredChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -312,6 +347,44 @@ func (m *MonitoredChains) Unmarshal(dAtA []byte) error {
 			}
 			m.Creator = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TimeoutInterval", wireType)
+			}
+			m.TimeoutInterval = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.TimeoutInterval |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 5:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UpdateInterval", wireType)
+			}
+			m.UpdateInterval = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowMonitoredChains
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.UpdateInterval |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipMonitoredChains(dAtA[iNdEx:])

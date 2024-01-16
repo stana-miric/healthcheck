@@ -3,32 +3,33 @@ package keeper
 import (
 	"context"
 
+	"healthcheck/x/healthcheck/types"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"healthcheck/x/healthcheck/types"
 )
 
-func (k Keeper) MonitoredChainsAll(goCtx context.Context, req *types.QueryAllMonitoredChainsRequest) (*types.QueryAllMonitoredChainsResponse, error) {
+func (k Keeper) MonitoredChainAll(goCtx context.Context, req *types.QueryAllMonitoredChainRequest) (*types.QueryAllMonitoredChainResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	var monitoredChainss []types.MonitoredChains
+	var MonitoredChains []types.MonitoredChain
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	store := ctx.KVStore(k.storeKey)
-	monitoredChainsStore := prefix.NewStore(store, types.KeyPrefix(types.MonitoredChainsKeyPrefix))
+	MonitoredChainStore := prefix.NewStore(store, types.KeyPrefix(types.MonitoredChainKeyPrefix))
 
-	pageRes, err := query.Paginate(monitoredChainsStore, req.Pagination, func(key []byte, value []byte) error {
-		var monitoredChains types.MonitoredChains
-		if err := k.cdc.Unmarshal(value, &monitoredChains); err != nil {
+	pageRes, err := query.Paginate(MonitoredChainStore, req.Pagination, func(key []byte, value []byte) error {
+		var MonitoredChain types.MonitoredChain
+		if err := k.cdc.Unmarshal(value, &MonitoredChain); err != nil {
 			return err
 		}
 
-		monitoredChainss = append(monitoredChainss, monitoredChains)
+		MonitoredChains = append(MonitoredChains, MonitoredChain)
 		return nil
 	})
 
@@ -36,16 +37,16 @@ func (k Keeper) MonitoredChainsAll(goCtx context.Context, req *types.QueryAllMon
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllMonitoredChainsResponse{MonitoredChains: monitoredChainss, Pagination: pageRes}, nil
+	return &types.QueryAllMonitoredChainResponse{MonitoredChain: MonitoredChains, Pagination: pageRes}, nil
 }
 
-func (k Keeper) MonitoredChains(goCtx context.Context, req *types.QueryGetMonitoredChainsRequest) (*types.QueryGetMonitoredChainsResponse, error) {
+func (k Keeper) MonitoredChain(goCtx context.Context, req *types.QueryGetMonitoredChainRequest) (*types.QueryGetMonitoredChainResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetMonitoredChains(
+	val, found := k.GetMonitoredChain(
 		ctx,
 		req.ChainId,
 	)
@@ -53,5 +54,5 @@ func (k Keeper) MonitoredChains(goCtx context.Context, req *types.QueryGetMonito
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetMonitoredChainsResponse{MonitoredChains: val}, nil
+	return &types.QueryGetMonitoredChainResponse{MonitoredChain: val}, nil
 }

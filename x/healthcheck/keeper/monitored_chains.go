@@ -1,29 +1,30 @@
 package keeper
 
 import (
+	"healthcheck/x/healthcheck/types"
+
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"healthcheck/x/healthcheck/types"
 )
 
-// SetMonitoredChains set a specific monitoredChains in the store from its index
-func (k Keeper) SetMonitoredChains(ctx sdk.Context, monitoredChains types.MonitoredChains) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainsKeyPrefix))
-	b := k.cdc.MustMarshal(&monitoredChains)
-	store.Set(types.MonitoredChainsKey(
-		monitoredChains.ChainId,
+// SetMonitoredChain set a specific MonitoredChain in the store from its index
+func (k Keeper) SetMonitoredChain(ctx sdk.Context, MonitoredChain types.MonitoredChain) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainKeyPrefix))
+	b := k.cdc.MustMarshal(&MonitoredChain)
+	store.Set(types.MonitoredChainKey(
+		MonitoredChain.ChainId,
 	), b)
 }
 
-// GetMonitoredChains returns a monitoredChains from its index
-func (k Keeper) GetMonitoredChains(
+// GetMonitoredChain returns a MonitoredChain from its index
+func (k Keeper) GetMonitoredChain(
 	ctx sdk.Context,
 	chainId string,
 
-) (val types.MonitoredChains, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainsKeyPrefix))
+) (val types.MonitoredChain, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainKeyPrefix))
 
-	b := store.Get(types.MonitoredChainsKey(
+	b := store.Get(types.MonitoredChainKey(
 		chainId,
 	))
 	if b == nil {
@@ -34,30 +35,43 @@ func (k Keeper) GetMonitoredChains(
 	return val, true
 }
 
-// RemoveMonitoredChains removes a monitoredChains from the store
-func (k Keeper) RemoveMonitoredChains(
+// RemoveMonitoredChain removes a MonitoredChain from the store
+func (k Keeper) RemoveMonitoredChain(
 	ctx sdk.Context,
 	chainId string,
 
 ) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainsKeyPrefix))
-	store.Delete(types.MonitoredChainsKey(
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainKeyPrefix))
+	store.Delete(types.MonitoredChainKey(
 		chainId,
 	))
 }
 
-// GetAllMonitoredChains returns all monitoredChains
-func (k Keeper) GetAllMonitoredChains(ctx sdk.Context) (list []types.MonitoredChains) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainsKeyPrefix))
+// GetAllMonitoredChain returns all MonitoredChain
+func (k Keeper) GetAllMonitoredChain(ctx sdk.Context) (list []types.MonitoredChain) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.MonitoredChainKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.MonitoredChains
+		var val types.MonitoredChain
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
 
 	return
+}
+
+func (k Keeper) StartTrackingMonitoredChain(connectionID string, timeoutInterval, updateInterval uint32) error {
+
+	// if err := k.UpdateRegisteredChainInterval(connectionID, timeoutInterval, updateInterval); err != nil {
+	// 	return err
+	// }
+
+	// if err := k.SetMonitoredChainEntry(); err != nil {
+	// 	return err
+	// }
+
+	return nil
 }

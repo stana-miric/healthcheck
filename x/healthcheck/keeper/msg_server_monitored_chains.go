@@ -3,16 +3,17 @@ package keeper
 import (
 	"context"
 
+	"healthcheck/x/healthcheck/types"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"healthcheck/x/healthcheck/types"
 )
 
-func (k msgServer) CreateMonitoredChains(goCtx context.Context, msg *types.MsgCreateMonitoredChains) (*types.MsgCreateMonitoredChainsResponse, error) {
+func (k msgServer) CreateMonitoredChain(goCtx context.Context, msg *types.MsgCreateMonitoredChain) (*types.MsgCreateMonitoredChainResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value already exists
-	_, isFound := k.GetMonitoredChains(
+	_, isFound := k.GetMonitoredChain(
 		ctx,
 		msg.ChainId,
 	)
@@ -20,24 +21,23 @@ func (k msgServer) CreateMonitoredChains(goCtx context.Context, msg *types.MsgCr
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "index already set")
 	}
 
-	var monitoredChains = types.MonitoredChains{
-		Creator:      msg.Creator,
+	var MonitoredChain = types.MonitoredChain{
 		ChainId:      msg.ChainId,
 		ConnectionId: msg.ConnectionId,
 	}
 
-	k.SetMonitoredChains(
+	k.SetMonitoredChain(
 		ctx,
-		monitoredChains,
+		MonitoredChain,
 	)
-	return &types.MsgCreateMonitoredChainsResponse{}, nil
+	return &types.MsgCreateMonitoredChainResponse{}, nil
 }
 
-func (k msgServer) UpdateMonitoredChains(goCtx context.Context, msg *types.MsgUpdateMonitoredChains) (*types.MsgUpdateMonitoredChainsResponse, error) {
+func (k msgServer) UpdateMonitoredChain(goCtx context.Context, msg *types.MsgUpdateMonitoredChain) (*types.MsgUpdateMonitoredChainResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetMonitoredChains(
+	_, isFound := k.GetMonitoredChain(
 		ctx,
 		msg.ChainId,
 	)
@@ -45,27 +45,22 @@ func (k msgServer) UpdateMonitoredChains(goCtx context.Context, msg *types.MsgUp
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "index not set")
 	}
 
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
-
-	var monitoredChains = types.MonitoredChains{
-		Creator:      msg.Creator,
+	var MonitoredChain = types.MonitoredChain{
+		//Creator:      msg.Creator,
 		ChainId:      msg.ChainId,
 		ConnectionId: msg.ConnectionId,
 	}
 
-	k.SetMonitoredChains(ctx, monitoredChains)
+	k.SetMonitoredChain(ctx, MonitoredChain)
 
-	return &types.MsgUpdateMonitoredChainsResponse{}, nil
+	return &types.MsgUpdateMonitoredChainResponse{}, nil
 }
 
-func (k msgServer) DeleteMonitoredChains(goCtx context.Context, msg *types.MsgDeleteMonitoredChains) (*types.MsgDeleteMonitoredChainsResponse, error) {
+func (k msgServer) DeleteMonitoredChain(goCtx context.Context, msg *types.MsgDeleteMonitoredChain) (*types.MsgDeleteMonitoredChainResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetMonitoredChains(
+	_, isFound := k.GetMonitoredChain(
 		ctx,
 		msg.ChainId,
 	)
@@ -73,15 +68,10 @@ func (k msgServer) DeleteMonitoredChains(goCtx context.Context, msg *types.MsgDe
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "index not set")
 	}
 
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
-
-	k.RemoveMonitoredChains(
+	k.RemoveMonitoredChain(
 		ctx,
 		msg.ChainId,
 	)
 
-	return &types.MsgDeleteMonitoredChainsResponse{}, nil
+	return &types.MsgDeleteMonitoredChainResponse{}, nil
 }

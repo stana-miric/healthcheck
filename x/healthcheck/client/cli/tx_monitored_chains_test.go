@@ -19,7 +19,7 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestCreateMonitoredChains(t *testing.T) {
+func TestCreateMonitoredChain(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -51,7 +51,7 @@ func TestCreateMonitoredChains(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChains(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChain(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -64,7 +64,7 @@ func TestCreateMonitoredChains(t *testing.T) {
 	}
 }
 
-func TestUpdateMonitoredChains(t *testing.T) {
+func TestUpdateMonitoredChain(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -81,7 +81,7 @@ func TestUpdateMonitoredChains(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChains(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChain(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -112,7 +112,7 @@ func TestUpdateMonitoredChains(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateMonitoredChains(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateMonitoredChain(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -125,7 +125,7 @@ func TestUpdateMonitoredChains(t *testing.T) {
 	}
 }
 
-func TestDeleteMonitoredChains(t *testing.T) {
+func TestDeleteMonitoredChain(t *testing.T) {
 	net := network.New(t)
 
 	val := net.Validators[0]
@@ -143,7 +143,7 @@ func TestDeleteMonitoredChains(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChains(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateMonitoredChain(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -173,7 +173,7 @@ func TestDeleteMonitoredChains(t *testing.T) {
 				tc.idChainId,
 			}
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteMonitoredChains(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteMonitoredChain(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

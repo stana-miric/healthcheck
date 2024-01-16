@@ -3,15 +3,17 @@ package healthcheck
 import (
 	"math/rand"
 
+	"healthcheck/testutil/sample"
+	healthchecksimulation "healthcheck/x/healthcheck/simulation"
+	"healthcheck/x/healthcheck/types"
+	commonTypes "healthcheck/x/types"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"healthcheck/testutil/sample"
-	healthchecksimulation "healthcheck/x/healthcheck/simulation"
-	"healthcheck/x/healthcheck/types"
 )
 
 // avoid unused import issue
@@ -24,17 +26,17 @@ var (
 )
 
 const (
-	opWeightMsgCreateMonitoredChains = "op_weight_msg_monitored_chains"
+	opWeightMsgCreateMonitoredChain = "op_weight_msg_monitored_chains"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateMonitoredChains int = 100
+	defaultWeightMsgCreateMonitoredChain int = 100
 
-	opWeightMsgUpdateMonitoredChains = "op_weight_msg_monitored_chains"
+	opWeightMsgUpdateMonitoredChain = "op_weight_msg_monitored_chains"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateMonitoredChains int = 100
+	defaultWeightMsgUpdateMonitoredChain int = 100
 
-	opWeightMsgDeleteMonitoredChains = "op_weight_msg_monitored_chains"
+	opWeightMsgDeleteMonitoredChain = "op_weight_msg_monitored_chains"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteMonitoredChains int = 100
+	defaultWeightMsgDeleteMonitoredChain int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -47,8 +49,8 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	healthcheckGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		PortId: types.PortID,
-		MonitoredChainsList: []types.MonitoredChains{
+		PortId: commonTypes.HealthcheckPortID,
+		MonitoredChainList: []types.MonitoredChain{
 			{
 				Creator: sample.AccAddress(),
 				ChainId: "0",
@@ -81,37 +83,37 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgCreateMonitoredChains int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateMonitoredChains, &weightMsgCreateMonitoredChains, nil,
+	var weightMsgCreateMonitoredChain int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateMonitoredChain, &weightMsgCreateMonitoredChain, nil,
 		func(_ *rand.Rand) {
-			weightMsgCreateMonitoredChains = defaultWeightMsgCreateMonitoredChains
+			weightMsgCreateMonitoredChain = defaultWeightMsgCreateMonitoredChain
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateMonitoredChains,
-		healthchecksimulation.SimulateMsgCreateMonitoredChains(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgCreateMonitoredChain,
+		healthchecksimulation.SimulateMsgCreateMonitoredChain(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgUpdateMonitoredChains int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateMonitoredChains, &weightMsgUpdateMonitoredChains, nil,
+	var weightMsgUpdateMonitoredChain int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateMonitoredChain, &weightMsgUpdateMonitoredChain, nil,
 		func(_ *rand.Rand) {
-			weightMsgUpdateMonitoredChains = defaultWeightMsgUpdateMonitoredChains
+			weightMsgUpdateMonitoredChain = defaultWeightMsgUpdateMonitoredChain
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateMonitoredChains,
-		healthchecksimulation.SimulateMsgUpdateMonitoredChains(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgUpdateMonitoredChain,
+		healthchecksimulation.SimulateMsgUpdateMonitoredChain(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgDeleteMonitoredChains int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteMonitoredChains, &weightMsgDeleteMonitoredChains, nil,
+	var weightMsgDeleteMonitoredChain int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteMonitoredChain, &weightMsgDeleteMonitoredChain, nil,
 		func(_ *rand.Rand) {
-			weightMsgDeleteMonitoredChains = defaultWeightMsgDeleteMonitoredChains
+			weightMsgDeleteMonitoredChain = defaultWeightMsgDeleteMonitoredChain
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteMonitoredChains,
-		healthchecksimulation.SimulateMsgDeleteMonitoredChains(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgDeleteMonitoredChain,
+		healthchecksimulation.SimulateMsgDeleteMonitoredChain(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

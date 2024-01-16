@@ -6,35 +6,34 @@ import (
 )
 
 const (
-	TypeMsgCreateMonitoredChains = "create_monitored_chains"
-	TypeMsgUpdateMonitoredChains = "update_monitored_chains"
-	TypeMsgDeleteMonitoredChains = "delete_monitored_chains"
+	TypeMsgCreateMonitoredChain = "create_monitored_chains"
+	TypeMsgUpdateMonitoredChain = "update_monitored_chains"
+	TypeMsgDeleteMonitoredChain = "delete_monitored_chains"
 )
 
-var _ sdk.Msg = &MsgCreateMonitoredChains{}
+var _ sdk.Msg = &MsgCreateMonitoredChain{}
 
-func NewMsgCreateMonitoredChains(
+func NewMsgCreateMonitoredChain(
 	creator string,
 	chainId string,
 	connectionId string,
 
-) *MsgCreateMonitoredChains {
-	return &MsgCreateMonitoredChains{
-		Creator:      creator,
+) *MsgCreateMonitoredChain {
+	return &MsgCreateMonitoredChain{
 		ChainId:      chainId,
 		ConnectionId: connectionId,
 	}
 }
 
-func (msg *MsgCreateMonitoredChains) Route() string {
+func (msg *MsgCreateMonitoredChain) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateMonitoredChains) Type() string {
-	return TypeMsgCreateMonitoredChains
+func (msg *MsgCreateMonitoredChain) Type() string {
+	return TypeMsgCreateMonitoredChain
 }
 
-func (msg *MsgCreateMonitoredChains) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateMonitoredChain) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -42,12 +41,12 @@ func (msg *MsgCreateMonitoredChains) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateMonitoredChains) GetSignBytes() []byte {
+func (msg *MsgCreateMonitoredChain) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateMonitoredChains) ValidateBasic() error {
+func (msg *MsgCreateMonitoredChain) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -55,30 +54,30 @@ func (msg *MsgCreateMonitoredChains) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgUpdateMonitoredChains{}
+var _ sdk.Msg = &MsgUpdateMonitoredChain{}
 
-func NewMsgUpdateMonitoredChains(
+func NewMsgUpdateMonitoredChain(
 	creator string,
 	chainId string,
 	connectionId string,
 
-) *MsgUpdateMonitoredChains {
-	return &MsgUpdateMonitoredChains{
+) *MsgUpdateMonitoredChain {
+	return &MsgUpdateMonitoredChain{
 		Creator:      creator,
 		ChainId:      chainId,
 		ConnectionId: connectionId,
 	}
 }
 
-func (msg *MsgUpdateMonitoredChains) Route() string {
+func (msg *MsgUpdateMonitoredChain) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateMonitoredChains) Type() string {
-	return TypeMsgUpdateMonitoredChains
+func (msg *MsgUpdateMonitoredChain) Type() string {
+	return TypeMsgUpdateMonitoredChain
 }
 
-func (msg *MsgUpdateMonitoredChains) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateMonitoredChain) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -86,12 +85,12 @@ func (msg *MsgUpdateMonitoredChains) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateMonitoredChains) GetSignBytes() []byte {
+func (msg *MsgUpdateMonitoredChain) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateMonitoredChains) ValidateBasic() error {
+func (msg *MsgUpdateMonitoredChain) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -99,27 +98,27 @@ func (msg *MsgUpdateMonitoredChains) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteMonitoredChains{}
+var _ sdk.Msg = &MsgDeleteMonitoredChain{}
 
-func NewMsgDeleteMonitoredChains(
+func NewMsgDeleteMonitoredChain(
 	creator string,
 	chainId string,
 
-) *MsgDeleteMonitoredChains {
-	return &MsgDeleteMonitoredChains{
+) *MsgDeleteMonitoredChain {
+	return &MsgDeleteMonitoredChain{
 		Creator: creator,
 		ChainId: chainId,
 	}
 }
-func (msg *MsgDeleteMonitoredChains) Route() string {
+func (msg *MsgDeleteMonitoredChain) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteMonitoredChains) Type() string {
-	return TypeMsgDeleteMonitoredChains
+func (msg *MsgDeleteMonitoredChain) Type() string {
+	return TypeMsgDeleteMonitoredChain
 }
 
-func (msg *MsgDeleteMonitoredChains) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteMonitoredChain) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -127,12 +126,12 @@ func (msg *MsgDeleteMonitoredChains) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteMonitoredChains) GetSignBytes() []byte {
+func (msg *MsgDeleteMonitoredChain) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteMonitoredChains) ValidateBasic() error {
+func (msg *MsgDeleteMonitoredChain) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

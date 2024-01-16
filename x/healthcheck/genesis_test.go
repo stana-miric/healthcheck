@@ -3,18 +3,20 @@ package healthcheck_test
 import (
 	"testing"
 
-	"github.com/stretchr/testify/require"
 	keepertest "healthcheck/testutil/keeper"
 	"healthcheck/testutil/nullify"
 	"healthcheck/x/healthcheck"
 	"healthcheck/x/healthcheck/types"
+	commonTypes "healthcheck/x/types"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
-		PortId: types.PortID,
-		MonitoredChainsList: []types.MonitoredChains{
+		PortId: commonTypes.HealthcheckPortID,
+		MonitoredChainList: []types.MonitoredChain{
 			{
 				ChainId: "0",
 			},
@@ -35,6 +37,6 @@ func TestGenesis(t *testing.T) {
 
 	require.Equal(t, genesisState.PortId, got.PortId)
 
-	require.ElementsMatch(t, genesisState.MonitoredChainsList, got.MonitoredChainsList)
+	require.ElementsMatch(t, genesisState.MonitoredChainList, got.MonitoredChainList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

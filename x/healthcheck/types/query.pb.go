@@ -113,22 +113,22 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
-type QueryGetMonitoredChainsRequest struct {
+type QueryGetMonitoredChainRequest struct {
 	ChainId string `protobuf:"bytes,1,opt,name=chainId,proto3" json:"chainId,omitempty"`
 }
 
-func (m *QueryGetMonitoredChainsRequest) Reset()         { *m = QueryGetMonitoredChainsRequest{} }
-func (m *QueryGetMonitoredChainsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetMonitoredChainsRequest) ProtoMessage()    {}
-func (*QueryGetMonitoredChainsRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetMonitoredChainRequest) Reset()         { *m = QueryGetMonitoredChainRequest{} }
+func (m *QueryGetMonitoredChainRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetMonitoredChainRequest) ProtoMessage()    {}
+func (*QueryGetMonitoredChainRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_89748a99d0ba3c0a, []int{2}
 }
-func (m *QueryGetMonitoredChainsRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetMonitoredChainRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetMonitoredChainsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetMonitoredChainRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetMonitoredChainsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetMonitoredChainRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -138,41 +138,41 @@ func (m *QueryGetMonitoredChainsRequest) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryGetMonitoredChainsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetMonitoredChainsRequest.Merge(m, src)
+func (m *QueryGetMonitoredChainRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetMonitoredChainRequest.Merge(m, src)
 }
-func (m *QueryGetMonitoredChainsRequest) XXX_Size() int {
+func (m *QueryGetMonitoredChainRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetMonitoredChainsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetMonitoredChainsRequest.DiscardUnknown(m)
+func (m *QueryGetMonitoredChainRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetMonitoredChainRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetMonitoredChainsRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetMonitoredChainRequest proto.InternalMessageInfo
 
-func (m *QueryGetMonitoredChainsRequest) GetChainId() string {
+func (m *QueryGetMonitoredChainRequest) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-type QueryGetMonitoredChainsResponse struct {
-	MonitoredChains MonitoredChains `protobuf:"bytes,1,opt,name=monitoredChains,proto3" json:"monitoredChains"`
+type QueryGetMonitoredChainResponse struct {
+	MonitoredChain MonitoredChain `protobuf:"bytes,1,opt,name=MonitoredChain,proto3" json:"MonitoredChain"`
 }
 
-func (m *QueryGetMonitoredChainsResponse) Reset()         { *m = QueryGetMonitoredChainsResponse{} }
-func (m *QueryGetMonitoredChainsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetMonitoredChainsResponse) ProtoMessage()    {}
-func (*QueryGetMonitoredChainsResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetMonitoredChainResponse) Reset()         { *m = QueryGetMonitoredChainResponse{} }
+func (m *QueryGetMonitoredChainResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetMonitoredChainResponse) ProtoMessage()    {}
+func (*QueryGetMonitoredChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_89748a99d0ba3c0a, []int{3}
 }
-func (m *QueryGetMonitoredChainsResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetMonitoredChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetMonitoredChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetMonitoredChainsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetMonitoredChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -182,41 +182,41 @@ func (m *QueryGetMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *QueryGetMonitoredChainsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetMonitoredChainsResponse.Merge(m, src)
+func (m *QueryGetMonitoredChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetMonitoredChainResponse.Merge(m, src)
 }
-func (m *QueryGetMonitoredChainsResponse) XXX_Size() int {
+func (m *QueryGetMonitoredChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetMonitoredChainsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetMonitoredChainsResponse.DiscardUnknown(m)
+func (m *QueryGetMonitoredChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetMonitoredChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetMonitoredChainsResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetMonitoredChainResponse proto.InternalMessageInfo
 
-func (m *QueryGetMonitoredChainsResponse) GetMonitoredChains() MonitoredChains {
+func (m *QueryGetMonitoredChainResponse) GetMonitoredChain() MonitoredChain {
 	if m != nil {
-		return m.MonitoredChains
+		return m.MonitoredChain
 	}
-	return MonitoredChains{}
+	return MonitoredChain{}
 }
 
-type QueryAllMonitoredChainsRequest struct {
+type QueryAllMonitoredChainRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllMonitoredChainsRequest) Reset()         { *m = QueryAllMonitoredChainsRequest{} }
-func (m *QueryAllMonitoredChainsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllMonitoredChainsRequest) ProtoMessage()    {}
-func (*QueryAllMonitoredChainsRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllMonitoredChainRequest) Reset()         { *m = QueryAllMonitoredChainRequest{} }
+func (m *QueryAllMonitoredChainRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllMonitoredChainRequest) ProtoMessage()    {}
+func (*QueryAllMonitoredChainRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_89748a99d0ba3c0a, []int{4}
 }
-func (m *QueryAllMonitoredChainsRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllMonitoredChainRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllMonitoredChainsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllMonitoredChainRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllMonitoredChainsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllMonitoredChainRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -226,42 +226,42 @@ func (m *QueryAllMonitoredChainsRequest) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryAllMonitoredChainsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllMonitoredChainsRequest.Merge(m, src)
+func (m *QueryAllMonitoredChainRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllMonitoredChainRequest.Merge(m, src)
 }
-func (m *QueryAllMonitoredChainsRequest) XXX_Size() int {
+func (m *QueryAllMonitoredChainRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllMonitoredChainsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllMonitoredChainsRequest.DiscardUnknown(m)
+func (m *QueryAllMonitoredChainRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllMonitoredChainRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllMonitoredChainsRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllMonitoredChainRequest proto.InternalMessageInfo
 
-func (m *QueryAllMonitoredChainsRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllMonitoredChainRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryAllMonitoredChainsResponse struct {
-	MonitoredChains []MonitoredChains   `protobuf:"bytes,1,rep,name=monitoredChains,proto3" json:"monitoredChains"`
-	Pagination      *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllMonitoredChainResponse struct {
+	MonitoredChain []MonitoredChain    `protobuf:"bytes,1,rep,name=MonitoredChain,proto3" json:"MonitoredChain"`
+	Pagination     *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllMonitoredChainsResponse) Reset()         { *m = QueryAllMonitoredChainsResponse{} }
-func (m *QueryAllMonitoredChainsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllMonitoredChainsResponse) ProtoMessage()    {}
-func (*QueryAllMonitoredChainsResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllMonitoredChainResponse) Reset()         { *m = QueryAllMonitoredChainResponse{} }
+func (m *QueryAllMonitoredChainResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllMonitoredChainResponse) ProtoMessage()    {}
+func (*QueryAllMonitoredChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_89748a99d0ba3c0a, []int{5}
 }
-func (m *QueryAllMonitoredChainsResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllMonitoredChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllMonitoredChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllMonitoredChainsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllMonitoredChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -271,26 +271,26 @@ func (m *QueryAllMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *QueryAllMonitoredChainsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllMonitoredChainsResponse.Merge(m, src)
+func (m *QueryAllMonitoredChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllMonitoredChainResponse.Merge(m, src)
 }
-func (m *QueryAllMonitoredChainsResponse) XXX_Size() int {
+func (m *QueryAllMonitoredChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllMonitoredChainsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllMonitoredChainsResponse.DiscardUnknown(m)
+func (m *QueryAllMonitoredChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllMonitoredChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllMonitoredChainsResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllMonitoredChainResponse proto.InternalMessageInfo
 
-func (m *QueryAllMonitoredChainsResponse) GetMonitoredChains() []MonitoredChains {
+func (m *QueryAllMonitoredChainResponse) GetMonitoredChain() []MonitoredChain {
 	if m != nil {
-		return m.MonitoredChains
+		return m.MonitoredChain
 	}
 	return nil
 }
 
-func (m *QueryAllMonitoredChainsResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllMonitoredChainResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -300,10 +300,10 @@ func (m *QueryAllMonitoredChainsResponse) GetPagination() *query.PageResponse {
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "healthcheck.healthcheck.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "healthcheck.healthcheck.QueryParamsResponse")
-	proto.RegisterType((*QueryGetMonitoredChainsRequest)(nil), "healthcheck.healthcheck.QueryGetMonitoredChainsRequest")
-	proto.RegisterType((*QueryGetMonitoredChainsResponse)(nil), "healthcheck.healthcheck.QueryGetMonitoredChainsResponse")
-	proto.RegisterType((*QueryAllMonitoredChainsRequest)(nil), "healthcheck.healthcheck.QueryAllMonitoredChainsRequest")
-	proto.RegisterType((*QueryAllMonitoredChainsResponse)(nil), "healthcheck.healthcheck.QueryAllMonitoredChainsResponse")
+	proto.RegisterType((*QueryGetMonitoredChainRequest)(nil), "healthcheck.healthcheck.QueryGetMonitoredChainRequest")
+	proto.RegisterType((*QueryGetMonitoredChainResponse)(nil), "healthcheck.healthcheck.QueryGetMonitoredChainResponse")
+	proto.RegisterType((*QueryAllMonitoredChainRequest)(nil), "healthcheck.healthcheck.QueryAllMonitoredChainRequest")
+	proto.RegisterType((*QueryAllMonitoredChainResponse)(nil), "healthcheck.healthcheck.QueryAllMonitoredChainResponse")
 }
 
 func init() {
@@ -311,39 +311,39 @@ func init() {
 }
 
 var fileDescriptor_89748a99d0ba3c0a = []byte{
-	// 501 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x94, 0x4f, 0x6b, 0x14, 0x31,
-	0x18, 0xc6, 0x37, 0xb5, 0xae, 0x18, 0x0f, 0x85, 0x58, 0xb0, 0x2c, 0x32, 0xa3, 0x51, 0x6c, 0xb5,
-	0x92, 0xb0, 0x2d, 0xe2, 0x3f, 0x3c, 0xb4, 0x82, 0xc5, 0x83, 0x50, 0x07, 0x0f, 0xe2, 0x45, 0xb2,
-	0xd3, 0x30, 0x33, 0x38, 0x33, 0x99, 0x4e, 0x52, 0xb1, 0x14, 0x2f, 0x9e, 0x3d, 0x08, 0x1e, 0xfc,
-	0x2e, 0xde, 0x04, 0x0f, 0x3d, 0x2e, 0x78, 0xf1, 0x24, 0xb2, 0xeb, 0x07, 0x91, 0x4d, 0x32, 0x38,
-	0x33, 0x9a, 0xdd, 0x15, 0x7a, 0xcb, 0x6e, 0xde, 0xf7, 0x79, 0x7e, 0x4f, 0xf2, 0x66, 0xe0, 0x95,
-	0x98, 0xb3, 0x54, 0xc5, 0x61, 0xcc, 0xc3, 0x57, 0xb4, 0xbe, 0xde, 0x3f, 0xe0, 0xe5, 0x21, 0x29,
-	0x4a, 0xa1, 0x04, 0xba, 0x50, 0xdb, 0x20, 0xb5, 0x75, 0x6f, 0x39, 0x12, 0x91, 0xd0, 0x35, 0x74,
-	0xb2, 0x32, 0xe5, 0xbd, 0x8b, 0x91, 0x10, 0x51, 0xca, 0x29, 0x2b, 0x12, 0xca, 0xf2, 0x5c, 0x28,
-	0xa6, 0x12, 0x91, 0x4b, 0xbb, 0x7b, 0x23, 0x14, 0x32, 0x13, 0x92, 0x0e, 0x98, 0xe4, 0xc6, 0x85,
-	0xbe, 0xee, 0x0f, 0xb8, 0x62, 0x7d, 0x5a, 0xb0, 0x28, 0xc9, 0x75, 0xb1, 0xad, 0xbd, 0xea, 0xa2,
-	0x2b, 0x58, 0xc9, 0xb2, 0x4a, 0x91, 0xb8, 0xaa, 0x32, 0x91, 0x27, 0x4a, 0x94, 0x7c, 0xef, 0x65,
-	0x18, 0xb3, 0xa4, 0x22, 0xc0, 0xcb, 0x10, 0x3d, 0x9d, 0xf8, 0xee, 0x6a, 0x91, 0x80, 0xef, 0x1f,
-	0x70, 0xa9, 0xf0, 0x33, 0x78, 0xbe, 0xf1, 0xaf, 0x2c, 0x44, 0x2e, 0x39, 0x7a, 0x00, 0xbb, 0xc6,
-	0x6c, 0x05, 0x5c, 0x02, 0x6b, 0xe7, 0x36, 0x7c, 0xe2, 0x38, 0x0c, 0x62, 0x1a, 0xb7, 0x17, 0x8f,
-	0x7f, 0xf8, 0x9d, 0xc0, 0x36, 0xe1, 0x7b, 0xd0, 0xd3, 0xaa, 0x3b, 0x5c, 0x3d, 0xa9, 0x68, 0x1e,
-	0x6a, 0x18, 0xeb, 0x8b, 0x56, 0xe0, 0x19, 0x4d, 0xf7, 0x78, 0x4f, 0x3b, 0x9c, 0x0d, 0xaa, 0x9f,
-	0xf8, 0x08, 0xfa, 0xce, 0x5e, 0x4b, 0xf7, 0x1c, 0x2e, 0x65, 0xcd, 0x2d, 0x8b, 0xb9, 0xe6, 0xc4,
-	0x6c, 0x49, 0x59, 0xde, 0xb6, 0x0c, 0x8e, 0x2d, 0xf8, 0x56, 0x9a, 0x3a, 0xc0, 0x1f, 0x41, 0xf8,
-	0xe7, 0xc2, 0xac, 0xed, 0x35, 0x62, 0x6e, 0x97, 0x4c, 0x6e, 0x97, 0x98, 0x19, 0xb2, 0xb7, 0x4b,
-	0x76, 0x59, 0xc4, 0x6d, 0x6f, 0x50, 0xeb, 0xc4, 0x5f, 0x81, 0xcd, 0xf9, 0x2f, 0xab, 0x69, 0x39,
-	0x4f, 0x9d, 0x40, 0x4e, 0xb4, 0xd3, 0x48, 0xb1, 0xa0, 0x53, 0xac, 0xce, 0x4c, 0x61, 0xb0, 0xea,
-	0x31, 0x36, 0x3e, 0x2d, 0xc2, 0xd3, 0x3a, 0x06, 0x7a, 0x0f, 0x60, 0xd7, 0x0c, 0x03, 0x5a, 0x77,
-	0xe2, 0xfd, 0x3d, 0x81, 0xbd, 0x9b, 0xf3, 0x15, 0x1b, 0x6f, 0xbc, 0xfa, 0xee, 0xdb, 0xaf, 0x8f,
-	0x0b, 0x97, 0x91, 0x4f, 0xa7, 0x3f, 0x12, 0xf4, 0x05, 0xc0, 0xa5, 0xd6, 0x61, 0xa0, 0xdb, 0xd3,
-	0xad, 0x9c, 0xd3, 0xda, 0xbb, 0xf3, 0xff, 0x8d, 0x96, 0xf7, 0xbe, 0xe6, 0xbd, 0x85, 0x36, 0xe9,
-	0xbc, 0xcf, 0x95, 0x1e, 0xd9, 0x97, 0xf0, 0x16, 0x7d, 0x06, 0x10, 0xb5, 0x84, 0xb7, 0xd2, 0x74,
-	0x56, 0x0c, 0xe7, 0xec, 0xce, 0x8a, 0xe1, 0x9e, 0x44, 0xdc, 0xd7, 0x31, 0xd6, 0xd1, 0xf5, 0xb9,
-	0x63, 0x6c, 0xdf, 0x3d, 0x1e, 0x79, 0x60, 0x38, 0xf2, 0xc0, 0xcf, 0x91, 0x07, 0x3e, 0x8c, 0xbd,
-	0xce, 0x70, 0xec, 0x75, 0xbe, 0x8f, 0xbd, 0xce, 0x0b, 0xbf, 0xde, 0xf7, 0xa6, 0xa1, 0xa2, 0x0e,
-	0x0b, 0x2e, 0x07, 0x5d, 0xfd, 0xc5, 0xda, 0xfc, 0x1d, 0x00, 0x00, 0xff, 0xff, 0x85, 0x6e, 0x98,
-	0x3d, 0xa7, 0x05, 0x00, 0x00,
+	// 497 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0xc1, 0x6b, 0x14, 0x31,
+	0x14, 0xc6, 0x27, 0xb5, 0xae, 0x18, 0x41, 0x30, 0x16, 0x2c, 0x83, 0xce, 0x68, 0x14, 0xab, 0x56,
+	0x12, 0xb6, 0x45, 0xa5, 0x88, 0x87, 0x56, 0xb0, 0x78, 0x10, 0xea, 0xa0, 0x17, 0x2f, 0x92, 0x9d,
+	0x86, 0x99, 0xc1, 0xd9, 0xc9, 0x74, 0x92, 0xaa, 0x45, 0xbc, 0x78, 0xf6, 0xa0, 0xf8, 0xc7, 0x78,
+	0x13, 0x8f, 0x3d, 0x16, 0xbc, 0x78, 0x12, 0xd9, 0xf5, 0x0f, 0x91, 0x49, 0x32, 0x38, 0x53, 0x9b,
+	0xdd, 0x15, 0x6f, 0xd9, 0xcd, 0x7b, 0xef, 0xfb, 0x7d, 0xc9, 0x97, 0x81, 0x97, 0x53, 0xce, 0x72,
+	0x95, 0xc6, 0x29, 0x8f, 0x5f, 0xd0, 0xf6, 0x7a, 0x67, 0x97, 0x57, 0x7b, 0xa4, 0xac, 0x84, 0x12,
+	0xe8, 0x5c, 0x6b, 0x83, 0xb4, 0xd6, 0xfe, 0x42, 0x22, 0x12, 0xa1, 0x6b, 0x68, 0xbd, 0x32, 0xe5,
+	0xfe, 0xf9, 0x44, 0x88, 0x24, 0xe7, 0x94, 0x95, 0x19, 0x65, 0x45, 0x21, 0x14, 0x53, 0x99, 0x28,
+	0xa4, 0xdd, 0xbd, 0x11, 0x0b, 0x39, 0x14, 0x92, 0x0e, 0x98, 0xe4, 0x46, 0x85, 0xbe, 0xec, 0x0f,
+	0xb8, 0x62, 0x7d, 0x5a, 0xb2, 0x24, 0x2b, 0x74, 0xb1, 0xad, 0xbd, 0xe2, 0xa2, 0x2b, 0x59, 0xc5,
+	0x86, 0xcd, 0x44, 0xe2, 0xaa, 0x1a, 0x8a, 0x22, 0x53, 0xa2, 0xe2, 0xdb, 0xcf, 0xe3, 0x94, 0x65,
+	0x0d, 0x01, 0x5e, 0x80, 0xe8, 0x71, 0xad, 0xbb, 0xa5, 0x87, 0x44, 0x7c, 0x67, 0x97, 0x4b, 0x85,
+	0x9f, 0xc0, 0xb3, 0x9d, 0x7f, 0x65, 0x29, 0x0a, 0xc9, 0xd1, 0x3d, 0xd8, 0x33, 0x62, 0x8b, 0xe0,
+	0x22, 0xb8, 0x76, 0x6a, 0x25, 0x24, 0x8e, 0xc3, 0x20, 0xa6, 0x71, 0x63, 0x7e, 0xff, 0x47, 0xe8,
+	0x45, 0xb6, 0x09, 0xaf, 0xc1, 0x0b, 0x7a, 0xea, 0x26, 0x57, 0x8f, 0x1a, 0x9a, 0xfb, 0x35, 0x8c,
+	0x95, 0x45, 0x8b, 0xf0, 0x84, 0x86, 0x7b, 0xb8, 0xad, 0x05, 0x4e, 0x46, 0xcd, 0x4f, 0xfc, 0x0a,
+	0x06, 0xae, 0x56, 0xcb, 0xf6, 0x14, 0x9e, 0xee, 0xee, 0x58, 0xc6, 0x25, 0x27, 0x63, 0xb7, 0xdc,
+	0xb2, 0x1e, 0x1a, 0x82, 0x13, 0xcb, 0xbc, 0x9e, 0xe7, 0x47, 0x33, 0x3f, 0x80, 0xf0, 0xcf, 0x55,
+	0x59, 0xcd, 0xab, 0xc4, 0xdc, 0x2b, 0xa9, 0xef, 0x95, 0x98, 0xf4, 0xd8, 0x7b, 0x25, 0x5b, 0x2c,
+	0xe1, 0xb6, 0x37, 0x6a, 0x75, 0xe2, 0xaf, 0xc0, 0x5a, 0x3c, 0x42, 0x69, 0x82, 0xc5, 0x63, 0xff,
+	0x6d, 0x11, 0x6d, 0x76, 0x1c, 0xcc, 0xd9, 0x53, 0x9b, 0xe6, 0xc0, 0x30, 0xb5, 0x2d, 0xac, 0x7c,
+	0x9c, 0x87, 0xc7, 0xb5, 0x05, 0xf4, 0x1e, 0xc0, 0x9e, 0x89, 0x00, 0x5a, 0x76, 0xc2, 0xfd, 0x9d,
+	0x3b, 0xff, 0xe6, 0x6c, 0xc5, 0x46, 0x1b, 0x2f, 0xbd, 0xfb, 0xf6, 0xeb, 0xd3, 0xdc, 0x25, 0x14,
+	0xd2, 0xc9, 0x4f, 0x03, 0x7d, 0x01, 0x87, 0x4f, 0x0e, 0xdd, 0x9e, 0xac, 0xe4, 0x8a, 0xa8, 0x7f,
+	0xe7, 0x9f, 0xfb, 0x2c, 0xec, 0x5d, 0x0d, 0x7b, 0x0b, 0xad, 0xd2, 0x59, 0x5f, 0x28, 0x7d, 0x63,
+	0xd3, 0xff, 0x16, 0x7d, 0x06, 0xf0, 0x4c, 0x77, 0xee, 0x7a, 0x9e, 0x4f, 0xf3, 0xe0, 0x8a, 0xec,
+	0x34, 0x0f, 0xce, 0x00, 0xe2, 0xbe, 0xf6, 0xb0, 0x8c, 0xae, 0xcf, 0xec, 0x61, 0x63, 0x6d, 0x7f,
+	0x14, 0x80, 0x83, 0x51, 0x00, 0x7e, 0x8e, 0x02, 0xf0, 0x61, 0x1c, 0x78, 0x07, 0xe3, 0xc0, 0xfb,
+	0x3e, 0x0e, 0xbc, 0x67, 0x61, 0xbb, 0xef, 0x75, 0x67, 0x8a, 0xda, 0x2b, 0xb9, 0x1c, 0xf4, 0xf4,
+	0x17, 0x6a, 0xf5, 0x77, 0x00, 0x00, 0x00, 0xff, 0xff, 0x31, 0x83, 0x80, 0xdb, 0x97, 0x05, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -360,9 +360,9 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	// Queries a list of MonitoredChains items.
-	MonitoredChains(ctx context.Context, in *QueryGetMonitoredChainsRequest, opts ...grpc.CallOption) (*QueryGetMonitoredChainsResponse, error)
-	MonitoredChainsAll(ctx context.Context, in *QueryAllMonitoredChainsRequest, opts ...grpc.CallOption) (*QueryAllMonitoredChainsResponse, error)
+	// Queries a list of MonitoredChain items.
+	MonitoredChain(ctx context.Context, in *QueryGetMonitoredChainRequest, opts ...grpc.CallOption) (*QueryGetMonitoredChainResponse, error)
+	MonitoredChainAll(ctx context.Context, in *QueryAllMonitoredChainRequest, opts ...grpc.CallOption) (*QueryAllMonitoredChainResponse, error)
 }
 
 type queryClient struct {
@@ -382,18 +382,18 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
-func (c *queryClient) MonitoredChains(ctx context.Context, in *QueryGetMonitoredChainsRequest, opts ...grpc.CallOption) (*QueryGetMonitoredChainsResponse, error) {
-	out := new(QueryGetMonitoredChainsResponse)
-	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Query/MonitoredChains", in, out, opts...)
+func (c *queryClient) MonitoredChain(ctx context.Context, in *QueryGetMonitoredChainRequest, opts ...grpc.CallOption) (*QueryGetMonitoredChainResponse, error) {
+	out := new(QueryGetMonitoredChainResponse)
+	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Query/MonitoredChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) MonitoredChainsAll(ctx context.Context, in *QueryAllMonitoredChainsRequest, opts ...grpc.CallOption) (*QueryAllMonitoredChainsResponse, error) {
-	out := new(QueryAllMonitoredChainsResponse)
-	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Query/MonitoredChainsAll", in, out, opts...)
+func (c *queryClient) MonitoredChainAll(ctx context.Context, in *QueryAllMonitoredChainRequest, opts ...grpc.CallOption) (*QueryAllMonitoredChainResponse, error) {
+	out := new(QueryAllMonitoredChainResponse)
+	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Query/MonitoredChainAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -404,9 +404,9 @@ func (c *queryClient) MonitoredChainsAll(ctx context.Context, in *QueryAllMonito
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	// Queries a list of MonitoredChains items.
-	MonitoredChains(context.Context, *QueryGetMonitoredChainsRequest) (*QueryGetMonitoredChainsResponse, error)
-	MonitoredChainsAll(context.Context, *QueryAllMonitoredChainsRequest) (*QueryAllMonitoredChainsResponse, error)
+	// Queries a list of MonitoredChain items.
+	MonitoredChain(context.Context, *QueryGetMonitoredChainRequest) (*QueryGetMonitoredChainResponse, error)
+	MonitoredChainAll(context.Context, *QueryAllMonitoredChainRequest) (*QueryAllMonitoredChainResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -416,11 +416,11 @@ type UnimplementedQueryServer struct {
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
 }
-func (*UnimplementedQueryServer) MonitoredChains(ctx context.Context, req *QueryGetMonitoredChainsRequest) (*QueryGetMonitoredChainsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MonitoredChains not implemented")
+func (*UnimplementedQueryServer) MonitoredChain(ctx context.Context, req *QueryGetMonitoredChainRequest) (*QueryGetMonitoredChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitoredChain not implemented")
 }
-func (*UnimplementedQueryServer) MonitoredChainsAll(ctx context.Context, req *QueryAllMonitoredChainsRequest) (*QueryAllMonitoredChainsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MonitoredChainsAll not implemented")
+func (*UnimplementedQueryServer) MonitoredChainAll(ctx context.Context, req *QueryAllMonitoredChainRequest) (*QueryAllMonitoredChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitoredChainAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -445,38 +445,38 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_MonitoredChains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetMonitoredChainsRequest)
+func _Query_MonitoredChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetMonitoredChainRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).MonitoredChains(ctx, in)
+		return srv.(QueryServer).MonitoredChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/healthcheck.healthcheck.Query/MonitoredChains",
+		FullMethod: "/healthcheck.healthcheck.Query/MonitoredChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).MonitoredChains(ctx, req.(*QueryGetMonitoredChainsRequest))
+		return srv.(QueryServer).MonitoredChain(ctx, req.(*QueryGetMonitoredChainRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_MonitoredChainsAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllMonitoredChainsRequest)
+func _Query_MonitoredChainAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllMonitoredChainRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).MonitoredChainsAll(ctx, in)
+		return srv.(QueryServer).MonitoredChainAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/healthcheck.healthcheck.Query/MonitoredChainsAll",
+		FullMethod: "/healthcheck.healthcheck.Query/MonitoredChainAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).MonitoredChainsAll(ctx, req.(*QueryAllMonitoredChainsRequest))
+		return srv.(QueryServer).MonitoredChainAll(ctx, req.(*QueryAllMonitoredChainRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -490,12 +490,12 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_Params_Handler,
 		},
 		{
-			MethodName: "MonitoredChains",
-			Handler:    _Query_MonitoredChains_Handler,
+			MethodName: "MonitoredChain",
+			Handler:    _Query_MonitoredChain_Handler,
 		},
 		{
-			MethodName: "MonitoredChainsAll",
-			Handler:    _Query_MonitoredChainsAll_Handler,
+			MethodName: "MonitoredChainAll",
+			Handler:    _Query_MonitoredChainAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -558,7 +558,7 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetMonitoredChainsRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetMonitoredChainRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -568,12 +568,12 @@ func (m *QueryGetMonitoredChainsRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetMonitoredChainsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetMonitoredChainRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetMonitoredChainsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetMonitoredChainRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -588,7 +588,7 @@ func (m *QueryGetMonitoredChainsRequest) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetMonitoredChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -598,18 +598,18 @@ func (m *QueryGetMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetMonitoredChainsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetMonitoredChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetMonitoredChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.MonitoredChains.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.MonitoredChain.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -621,7 +621,7 @@ func (m *QueryGetMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllMonitoredChainsRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllMonitoredChainRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -631,12 +631,12 @@ func (m *QueryAllMonitoredChainsRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllMonitoredChainsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllMonitoredChainRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllMonitoredChainsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllMonitoredChainRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -656,7 +656,7 @@ func (m *QueryAllMonitoredChainsRequest) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllMonitoredChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -666,12 +666,12 @@ func (m *QueryAllMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllMonitoredChainsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllMonitoredChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllMonitoredChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -688,10 +688,10 @@ func (m *QueryAllMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.MonitoredChains) > 0 {
-		for iNdEx := len(m.MonitoredChains) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.MonitoredChain) > 0 {
+		for iNdEx := len(m.MonitoredChain) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.MonitoredChains[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.MonitoredChain[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -736,7 +736,7 @@ func (m *QueryParamsResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetMonitoredChainsRequest) Size() (n int) {
+func (m *QueryGetMonitoredChainRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -749,18 +749,18 @@ func (m *QueryGetMonitoredChainsRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetMonitoredChainsResponse) Size() (n int) {
+func (m *QueryGetMonitoredChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = m.MonitoredChains.Size()
+	l = m.MonitoredChain.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
 
-func (m *QueryAllMonitoredChainsRequest) Size() (n int) {
+func (m *QueryAllMonitoredChainRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -773,14 +773,14 @@ func (m *QueryAllMonitoredChainsRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryAllMonitoredChainsResponse) Size() (n int) {
+func (m *QueryAllMonitoredChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.MonitoredChains) > 0 {
-		for _, e := range m.MonitoredChains {
+	if len(m.MonitoredChain) > 0 {
+		for _, e := range m.MonitoredChain {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -931,7 +931,7 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetMonitoredChainRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -954,10 +954,10 @@ func (m *QueryGetMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetMonitoredChainsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetMonitoredChainRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetMonitoredChainsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetMonitoredChainRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1013,7 +1013,7 @@ func (m *QueryGetMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetMonitoredChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1036,15 +1036,15 @@ func (m *QueryGetMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetMonitoredChainsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetMonitoredChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetMonitoredChainsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetMonitoredChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MonitoredChains", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MonitoredChain", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1071,7 +1071,7 @@ func (m *QueryGetMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.MonitoredChains.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MonitoredChain.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1096,7 +1096,7 @@ func (m *QueryGetMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllMonitoredChainRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1119,10 +1119,10 @@ func (m *QueryAllMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllMonitoredChainsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllMonitoredChainRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllMonitoredChainsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllMonitoredChainRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1182,7 +1182,7 @@ func (m *QueryAllMonitoredChainsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllMonitoredChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1205,15 +1205,15 @@ func (m *QueryAllMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllMonitoredChainsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllMonitoredChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllMonitoredChainsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllMonitoredChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MonitoredChains", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MonitoredChain", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1240,8 +1240,8 @@ func (m *QueryAllMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MonitoredChains = append(m.MonitoredChains, MonitoredChains{})
-			if err := m.MonitoredChains[len(m.MonitoredChains)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.MonitoredChain = append(m.MonitoredChain, MonitoredChain{})
+			if err := m.MonitoredChain[len(m.MonitoredChain)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

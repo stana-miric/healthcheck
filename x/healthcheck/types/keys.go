@@ -12,12 +12,6 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_healthcheck"
-
-	// Version defines the current version the IBC module supports
-	Version = "healthcheck-1"
-
-	// PortID is the default port id that module binds to
-	PortID = "healthcheck"
 )
 
 var (

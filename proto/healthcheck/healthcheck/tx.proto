@@ -2,36 +2,34 @@ syntax = "proto3";
 
 package healthcheck.healthcheck;
 
-import "healthcheck/healthcheck/monitored_chains.proto";
-
 option go_package = "healthcheck/x/healthcheck/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc CreateMonitoredChains (MsgCreateMonitoredChains) returns (MsgCreateMonitoredChainsResponse);
-  rpc UpdateMonitoredChains (MsgUpdateMonitoredChains) returns (MsgUpdateMonitoredChainsResponse);
-  rpc DeleteMonitoredChains (MsgDeleteMonitoredChains) returns (MsgDeleteMonitoredChainsResponse);
+  rpc CreateMonitoredChain (MsgCreateMonitoredChain) returns (MsgCreateMonitoredChainResponse);
+  rpc UpdateMonitoredChain (MsgUpdateMonitoredChain) returns (MsgUpdateMonitoredChainResponse);
+  rpc DeleteMonitoredChain (MsgDeleteMonitoredChain) returns (MsgDeleteMonitoredChainResponse);
 }
-message MsgCreateMonitoredChains {
+message MsgCreateMonitoredChain {
   string creator      = 1;
   string chainId      = 2;
   string connectionId = 3;
 }
 
-message MsgCreateMonitoredChainsResponse {}
+message MsgCreateMonitoredChainResponse {}
 
-message MsgUpdateMonitoredChains {
+message MsgUpdateMonitoredChain {
   string creator      = 1;
   string chainId      = 2;
   string connectionId = 3;
 }
 
-message MsgUpdateMonitoredChainsResponse {}
+message MsgUpdateMonitoredChainResponse {}
 
-message MsgDeleteMonitoredChains {
+message MsgDeleteMonitoredChain {
   string creator = 1;
   string chainId = 2;
 }
 
-message MsgDeleteMonitoredChainsResponse {}
+message MsgDeleteMonitoredChainResponse {}
 

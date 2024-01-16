@@ -3,9 +3,11 @@ package healthcheck.healthcheck;
 
 option go_package = "healthcheck/x/healthcheck/types";
 
-message MonitoredChains {
+message MonitoredChain {
   string chainId = 1; 
   string connectionId = 2; 
   string creator = 3;
+  uint32 timeoutInterval = 4;
+  uint32 updateInterval = 5;
 }
 

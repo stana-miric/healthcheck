@@ -33871,14 +33871,14 @@ paths:
         - Query
   /healthcheck/healthcheck/monitored_chains:
     get:
-      operationId: HealthcheckHealthcheckMonitoredChainsAll
+      operationId: HealthcheckHealthcheckMonitoredChainAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              monitoredChains:
+              MonitoredChain:
                 type: array
                 items:
                   type: object
@@ -33889,6 +33889,12 @@ paths:
                       type: string
                     creator:
                       type: string
+                    timeoutInterval:
+                      type: integer
+                      format: int64
+                    updateInterval:
+                      type: integer
+                      format: int64
               pagination:
                 type: object
                 properties:
@@ -33996,15 +34002,15 @@ paths:
         - Query
   /healthcheck/healthcheck/monitored_chains/{chainId}:
     get:
-      summary: Queries a list of MonitoredChains items.
-      operationId: HealthcheckHealthcheckMonitoredChains
+      summary: Queries a list of MonitoredChain items.
+      operationId: HealthcheckHealthcheckMonitoredChain
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              monitoredChains:
+              MonitoredChain:
                 type: object
                 properties:
                   chainId:
@@ -34013,6 +34019,12 @@ paths:
                     type: string
                   creator:
                     type: string
+                  timeoutInterval:
+                    type: integer
+                    format: int64
+                  updateInterval:
+                    type: integer
+                    format: int64
         default:
           description: An unexpected error response.
           schema:
@@ -70324,7 +70336,7 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: Period defines a length of time and amount of coins that will vest.
-  healthcheck.healthcheck.MonitoredChains:
+  healthcheck.healthcheck.MonitoredChain:
     type: object
     properties:
       chainId:
@@ -70333,19 +70345,25 @@ definitions:
         type: string
       creator:
         type: string
-  healthcheck.healthcheck.MsgCreateMonitoredChainsResponse:
+      timeoutInterval:
+        type: integer
+        format: int64
+      updateInterval:
+        type: integer
+        format: int64
+  healthcheck.healthcheck.MsgCreateMonitoredChainResponse:
     type: object
-  healthcheck.healthcheck.MsgDeleteMonitoredChainsResponse:
+  healthcheck.healthcheck.MsgDeleteMonitoredChainResponse:
     type: object
-  healthcheck.healthcheck.MsgUpdateMonitoredChainsResponse:
+  healthcheck.healthcheck.MsgUpdateMonitoredChainResponse:
     type: object
   healthcheck.healthcheck.Params:
     type: object
     description: Params defines the parameters for the module.
-  healthcheck.healthcheck.QueryAllMonitoredChainsResponse:
+  healthcheck.healthcheck.QueryAllMonitoredChainResponse:
     type: object
     properties:
-      monitoredChains:
+      MonitoredChain:
         type: array
         items:
           type: object
@@ -70356,6 +70374,12 @@ definitions:
               type: string
             creator:
               type: string
+            timeoutInterval:
+              type: integer
+              format: int64
+            updateInterval:
+              type: integer
+              format: int64
       pagination:
         type: object
         properties:
@@ -70382,10 +70406,10 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  healthcheck.healthcheck.QueryGetMonitoredChainsResponse:
+  healthcheck.healthcheck.QueryGetMonitoredChainResponse:
     type: object
     properties:
-      monitoredChains:
+      MonitoredChain:
         type: object
         properties:
           chainId:
@@ -70394,6 +70418,12 @@ definitions:
             type: string
           creator:
             type: string
+          timeoutInterval:
+            type: integer
+            format: int64
+          updateInterval:
+            type: integer
+            format: int64
   healthcheck.healthcheck.QueryParamsResponse:
     type: object
     properties:

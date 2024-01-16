@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// MonitoredChainsKeyPrefix is the prefix to retrieve all MonitoredChains
-	MonitoredChainsKeyPrefix = "MonitoredChains/value/"
+	// MonitoredChainKeyPrefix is the prefix to retrieve all MonitoredChain
+	MonitoredChainKeyPrefix = "MonitoredChain/value/"
 )
 
-// MonitoredChainsKey returns the store key to retrieve a MonitoredChains from the index fields
-func MonitoredChainsKey(
+// MonitoredChainKey returns the store key to retrieve a MonitoredChain from the index fields
+func MonitoredChainKey(
 	chainId string,
 ) []byte {
 	var key []byte

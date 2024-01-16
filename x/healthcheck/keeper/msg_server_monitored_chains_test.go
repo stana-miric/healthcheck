@@ -16,18 +16,18 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestMonitoredChainsMsgServerCreate(t *testing.T) {
+func TestMonitoredChainMsgServerCreate(t *testing.T) {
 	k, ctx := keepertest.HealthcheckKeeper(t)
 	srv := keeper.NewMsgServerImpl(*k)
 	wctx := sdk.WrapSDKContext(ctx)
 	creator := "A"
 	for i := 0; i < 5; i++ {
-		expected := &types.MsgCreateMonitoredChains{Creator: creator,
+		expected := &types.MsgCreateMonitoredChain{Creator: creator,
 			ChainId: strconv.Itoa(i),
 		}
-		_, err := srv.CreateMonitoredChains(wctx, expected)
+		_, err := srv.CreateMonitoredChain(wctx, expected)
 		require.NoError(t, err)
-		rst, found := k.GetMonitoredChains(ctx,
+		rst, found := k.GetMonitoredChain(ctx,
 			expected.ChainId,
 		)
 		require.True(t, found)
@@ -35,30 +35,30 @@ func TestMonitoredChainsMsgServerCreate(t *testing.T) {
 	}
 }
 
-func TestMonitoredChainsMsgServerUpdate(t *testing.T) {
+func TestMonitoredChainMsgServerUpdate(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgUpdateMonitoredChains
+		request *types.MsgUpdateMonitoredChain
 		err     error
 	}{
 		{
 			desc: "Completed",
-			request: &types.MsgUpdateMonitoredChains{Creator: creator,
+			request: &types.MsgUpdateMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(0),
 			},
 		},
 		{
 			desc: "Unauthorized",
-			request: &types.MsgUpdateMonitoredChains{Creator: "B",
+			request: &types.MsgUpdateMonitoredChain{Creator: "B",
 				ChainId: strconv.Itoa(0),
 			},
 			err: sdkerrors.ErrUnauthorized,
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.MsgUpdateMonitoredChains{Creator: creator,
+			request: &types.MsgUpdateMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(100000),
 			},
 			err: sdkerrors.ErrKeyNotFound,
@@ -68,18 +68,18 @@ func TestMonitoredChainsMsgServerUpdate(t *testing.T) {
 			k, ctx := keepertest.HealthcheckKeeper(t)
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
-			expected := &types.MsgCreateMonitoredChains{Creator: creator,
+			expected := &types.MsgCreateMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(0),
 			}
-			_, err := srv.CreateMonitoredChains(wctx, expected)
+			_, err := srv.CreateMonitoredChain(wctx, expected)
 			require.NoError(t, err)
 
-			_, err = srv.UpdateMonitoredChains(wctx, tc.request)
+			_, err = srv.UpdateMonitoredChain(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				rst, found := k.GetMonitoredChains(ctx,
+				rst, found := k.GetMonitoredChain(ctx,
 					expected.ChainId,
 				)
 				require.True(t, found)
@@ -89,30 +89,30 @@ func TestMonitoredChainsMsgServerUpdate(t *testing.T) {
 	}
 }
 
-func TestMonitoredChainsMsgServerDelete(t *testing.T) {
+func TestMonitoredChainMsgServerDelete(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgDeleteMonitoredChains
+		request *types.MsgDeleteMonitoredChain
 		err     error
 	}{
 		{
 			desc: "Completed",
-			request: &types.MsgDeleteMonitoredChains{Creator: creator,
+			request: &types.MsgDeleteMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(0),
 			},
 		},
 		{
 			desc: "Unauthorized",
-			request: &types.MsgDeleteMonitoredChains{Creator: "B",
+			request: &types.MsgDeleteMonitoredChain{Creator: "B",
 				ChainId: strconv.Itoa(0),
 			},
 			err: sdkerrors.ErrUnauthorized,
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.MsgDeleteMonitoredChains{Creator: creator,
+			request: &types.MsgDeleteMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(100000),
 			},
 			err: sdkerrors.ErrKeyNotFound,
@@ -123,16 +123,16 @@ func TestMonitoredChainsMsgServerDelete(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 
-			_, err := srv.CreateMonitoredChains(wctx, &types.MsgCreateMonitoredChains{Creator: creator,
+			_, err := srv.CreateMonitoredChain(wctx, &types.MsgCreateMonitoredChain{Creator: creator,
 				ChainId: strconv.Itoa(0),
 			})
 			require.NoError(t, err)
-			_, err = srv.DeleteMonitoredChains(wctx, tc.request)
+			_, err = srv.DeleteMonitoredChain(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				_, found := k.GetMonitoredChains(ctx,
+				_, found := k.GetMonitoredChain(ctx,
 					tc.request.ChainId,
 				)
 				require.False(t, found)

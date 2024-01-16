@@ -1,17 +1,18 @@
 package cli
 
 import (
+	"healthcheck/x/healthcheck/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-	"healthcheck/x/healthcheck/types"
 )
 
-func CmdCreateMonitoredChains() *cobra.Command {
+func CmdCreateMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-monitored-chains [chain-id] [connection-id]",
-		Short: "Create a new MonitoredChains",
+		Short: "Create a new MonitoredChain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Get indexes
@@ -25,7 +26,7 @@ func CmdCreateMonitoredChains() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateMonitoredChains(
+			msg := types.NewMsgCreateMonitoredChain(
 				clientCtx.GetFromAddress().String(),
 				indexChainId,
 				argConnectionId,
@@ -42,10 +43,10 @@ func CmdCreateMonitoredChains() *cobra.Command {
 	return cmd
 }
 
-func CmdUpdateMonitoredChains() *cobra.Command {
+func CmdUpdateMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update-monitored-chains [chain-id] [connection-id]",
-		Short: "Update a MonitoredChains",
+		Short: "Update a MonitoredChain",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Get indexes
@@ -59,7 +60,7 @@ func CmdUpdateMonitoredChains() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateMonitoredChains(
+			msg := types.NewMsgUpdateMonitoredChain(
 				clientCtx.GetFromAddress().String(),
 				indexChainId,
 				argConnectionId,
@@ -76,10 +77,10 @@ func CmdUpdateMonitoredChains() *cobra.Command {
 	return cmd
 }
 
-func CmdDeleteMonitoredChains() *cobra.Command {
+func CmdDeleteMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "delete-monitored-chains [chain-id]",
-		Short: "Delete a MonitoredChains",
+		Short: "Delete a MonitoredChain",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			indexChainId := args[0]
@@ -89,7 +90,7 @@ func CmdDeleteMonitoredChains() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgDeleteMonitoredChains(
+			msg := types.NewMsgDeleteMonitoredChain(
 				clientCtx.GetFromAddress().String(),
 				indexChainId,
 			)

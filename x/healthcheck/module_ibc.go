@@ -5,7 +5,7 @@ import (
 
 	"healthcheck/x/healthcheck/keeper"
 	"healthcheck/x/healthcheck/types"
-	packetType "healthcheck/x/types"
+	commonTypes "healthcheck/x/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -38,22 +38,7 @@ func (im IBCModule) OnChanOpenInit(
 	version string,
 ) (string, error) {
 
-	// Require portID is the portID module is bound to
-	boundPort := im.keeper.GetPort(ctx)
-	if boundPort != portID {
-		return "", sdkerrors.Wrapf(porttypes.ErrInvalidPort, "invalid port: %s, expected %s", portID, boundPort)
-	}
-
-	if version != types.Version {
-		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "got %s, expected %s", version, types.Version)
-	}
-
-	// Claim channel capability passed back by IBC module
-	if err := im.keeper.ClaimCapability(ctx, chanCap, host.ChannelCapabilityPath(portID, channelID)); err != nil {
-		return "", err
-	}
-
-	return version, nil
+	return "", sdkerrors.Wrap(types.ErrInvalidChannelFlow, "channel handshake must be initiated by monitored chain")
 }
 
 // OnChanOpenTry implements the IBCModule interface
@@ -65,7 +50,7 @@ func (im IBCModule) OnChanOpenTry(
 	channelID string,
 	chanCap *capabilitytypes.Capability,
 	counterparty channeltypes.Counterparty,
-	counterpartyVersion string,
+	handshakeMetadata string,
 ) (string, error) {
 
 	// Require portID is the portID module is bound to
@@ -74,22 +59,29 @@ func (im IBCModule) OnChanOpenTry(
 		return "", sdkerrors.Wrapf(porttypes.ErrInvalidPort, "invalid port: %s, expected %s", portID, boundPort)
 	}
 
-	if counterpartyVersion != types.Version {
-		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: got: %s, expected %s", counterpartyVersion, types.Version)
+	if counterparty.PortId != commonTypes.MonitoredPortID {
+		return "", sdkerrors.Wrapf(porttypes.ErrInvalidPort, "invalid port: %s, expected %s", portID, commonTypes.MonitoredPortID)
 	}
 
-	// Module may have already claimed capability in OnChanOpenInit in the case of crossing hellos
-	// (ie chainA and chainB both call ChanOpenInit before one of them calls ChanOpenTry)
-	// If module can already authenticate the capability then module already owns it so we don't need to claim
-	// Otherwise, module does not have channel capability and we must claim it from IBC
-	if !im.keeper.AuthenticateCapability(ctx, chanCap, host.ChannelCapabilityPath(portID, channelID)) {
-		// Only claim channel capability passed back by IBC module if we do not already own it
-		if err := im.keeper.ClaimCapability(ctx, chanCap, host.ChannelCapabilityPath(portID, channelID)); err != nil {
-			return "", err
-		}
+	var md commonTypes.HandshakeMetadata
+	if err := (&md).Unmarshal([]byte(handshakeMetadata)); err != nil {
+		return "", sdkerrors.Wrapf(types.ErrInvalidHandshakeMetadata,
+			"error unmarshalling ibc-ack metadata: \n%v; \nmetadata: %v", err, handshakeMetadata)
 	}
 
-	return types.Version, nil
+	if md.Version != commonTypes.Version {
+		return "", sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: got: %s, expected %s", md.Version, commonTypes.Version)
+	}
+
+	if err := im.keeper.StartTrackingMonitoredChain(connectionHops[0], md.TimeoutInterval, md.UpdateInterval); err != nil {
+		return "", err
+	}
+
+	if err := im.keeper.ClaimCapability(ctx, chanCap, host.ChannelCapabilityPath(portID, channelID)); err != nil {
+		return "", err
+	}
+
+	return commonTypes.Version, nil
 }
 
 // OnChanOpenAck implements the IBCModule interface
@@ -100,10 +92,7 @@ func (im IBCModule) OnChanOpenAck(
 	_,
 	counterpartyVersion string,
 ) error {
-	if counterpartyVersion != types.Version {
-		return sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: %s, expected %s", counterpartyVersion, types.Version)
-	}
-	return nil
+	return sdkerrors.Wrap(types.ErrInvalidChannelFlow, "channel handshake must be initiated by monitored chain")
 }
 
 // OnChanOpenConfirm implements the IBCModule interface
@@ -144,7 +133,7 @@ func (im IBCModule) OnRecvPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/recv
 
-	var modulePacketData packetType.HealthcheckPacketData
+	var modulePacketData commonTypes.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error()))
 	}
@@ -175,7 +164,7 @@ func (im IBCModule) OnAcknowledgementPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/ack
 
-	var modulePacketData packetType.HealthcheckPacketData
+	var modulePacketData commonTypes.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
 	}
@@ -224,7 +213,7 @@ func (im IBCModule) OnTimeoutPacket(
 	modulePacket channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) error {
-	var modulePacketData packetType.HealthcheckPacketData
+	var modulePacketData commonTypes.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
 	}

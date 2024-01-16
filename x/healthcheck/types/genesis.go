@@ -2,6 +2,8 @@ package types
 
 import (
 	"fmt"
+	commonTypes "healthcheck/x/types"
+
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
 )
 
@@ -11,8 +13,8 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortId:              PortID,
-		MonitoredChainsList: []MonitoredChains{},
+		PortId:             commonTypes.HealthcheckPortID,
+		MonitoredChainList: []MonitoredChain{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -24,15 +26,15 @@ func (gs GenesisState) Validate() error {
 	if err := host.PortIdentifierValidator(gs.PortId); err != nil {
 		return err
 	}
-	// Check for duplicated index in monitoredChains
-	monitoredChainsIndexMap := make(map[string]struct{})
+	// Check for duplicated index in MonitoredChain
+	MonitoredChainIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.MonitoredChainsList {
-		index := string(MonitoredChainsKey(elem.ChainId))
-		if _, ok := monitoredChainsIndexMap[index]; ok {
-			return fmt.Errorf("duplicated index for monitoredChains")
+	for _, elem := range gs.MonitoredChainList {
+		index := string(MonitoredChainKey(elem.ChainId))
+		if _, ok := MonitoredChainIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for MonitoredChain")
 		}
-		monitoredChainsIndexMap[index] = struct{}{}
+		MonitoredChainIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

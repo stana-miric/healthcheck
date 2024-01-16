@@ -3,26 +3,27 @@ package types
 import (
 	"testing"
 
+	"healthcheck/testutil/sample"
+
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-	"healthcheck/testutil/sample"
 )
 
-func TestMsgCreateMonitoredChains_ValidateBasic(t *testing.T) {
+func TestMsgCreateMonitoredChain_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateMonitoredChains
+		msg  MsgCreateMonitoredChain
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateMonitoredChains{
+			msg: MsgCreateMonitoredChain{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateMonitoredChains{
+			msg: MsgCreateMonitoredChain{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -39,21 +40,21 @@ func TestMsgCreateMonitoredChains_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgUpdateMonitoredChains_ValidateBasic(t *testing.T) {
+func TestMsgUpdateMonitoredChain_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgUpdateMonitoredChains
+		msg  MsgUpdateMonitoredChain
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgUpdateMonitoredChains{
+			msg: MsgUpdateMonitoredChain{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgUpdateMonitoredChains{
+			msg: MsgUpdateMonitoredChain{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -70,21 +71,21 @@ func TestMsgUpdateMonitoredChains_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgDeleteMonitoredChains_ValidateBasic(t *testing.T) {
+func TestMsgDeleteMonitoredChain_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgDeleteMonitoredChains
+		msg  MsgDeleteMonitoredChain
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgDeleteMonitoredChains{
+			msg: MsgDeleteMonitoredChain{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgDeleteMonitoredChains{
+			msg: MsgDeleteMonitoredChain{
 				Creator: sample.AccAddress(),
 			},
 		},

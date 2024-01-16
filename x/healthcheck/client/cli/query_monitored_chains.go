@@ -3,16 +3,17 @@ package cli
 import (
 	"context"
 
+	"healthcheck/x/healthcheck/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
-	"healthcheck/x/healthcheck/types"
 )
 
-func CmdListMonitoredChains() *cobra.Command {
+func CmdListMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-monitored-chains",
-		Short: "list all MonitoredChains",
+		Short: "list all MonitoredChain",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -23,11 +24,11 @@ func CmdListMonitoredChains() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllMonitoredChainsRequest{
+			params := &types.QueryAllMonitoredChainRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.MonitoredChainsAll(context.Background(), params)
+			res, err := queryClient.MonitoredChainAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -42,10 +43,10 @@ func CmdListMonitoredChains() *cobra.Command {
 	return cmd
 }
 
-func CmdShowMonitoredChains() *cobra.Command {
+func CmdShowMonitoredChain() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show-monitored-chains [chain-id]",
-		Short: "shows a MonitoredChains",
+		Short: "shows a MonitoredChain",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
@@ -54,11 +55,11 @@ func CmdShowMonitoredChains() *cobra.Command {
 
 			argChainId := args[0]
 
-			params := &types.QueryGetMonitoredChainsRequest{
+			params := &types.QueryGetMonitoredChainRequest{
 				ChainId: argChainId,
 			}
 
-			res, err := queryClient.MonitoredChains(context.Background(), params)
+			res, err := queryClient.MonitoredChain(context.Background(), params)
 			if err != nil {
 				return err
 			}

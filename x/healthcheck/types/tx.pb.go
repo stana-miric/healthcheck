@@ -27,24 +27,24 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MsgCreateMonitoredChains struct {
+type MsgCreateMonitoredChain struct {
 	Creator      string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ChainId      string `protobuf:"bytes,2,opt,name=chainId,proto3" json:"chainId,omitempty"`
 	ConnectionId string `protobuf:"bytes,3,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
 }
 
-func (m *MsgCreateMonitoredChains) Reset()         { *m = MsgCreateMonitoredChains{} }
-func (m *MsgCreateMonitoredChains) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateMonitoredChains) ProtoMessage()    {}
-func (*MsgCreateMonitoredChains) Descriptor() ([]byte, []int) {
+func (m *MsgCreateMonitoredChain) Reset()         { *m = MsgCreateMonitoredChain{} }
+func (m *MsgCreateMonitoredChain) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateMonitoredChain) ProtoMessage()    {}
+func (*MsgCreateMonitoredChain) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{0}
 }
-func (m *MsgCreateMonitoredChains) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateMonitoredChain) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateMonitoredChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateMonitoredChains.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateMonitoredChain.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -54,54 +54,54 @@ func (m *MsgCreateMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateMonitoredChains) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateMonitoredChains.Merge(m, src)
+func (m *MsgCreateMonitoredChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateMonitoredChain.Merge(m, src)
 }
-func (m *MsgCreateMonitoredChains) XXX_Size() int {
+func (m *MsgCreateMonitoredChain) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateMonitoredChains) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateMonitoredChains.DiscardUnknown(m)
+func (m *MsgCreateMonitoredChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateMonitoredChain.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateMonitoredChains proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateMonitoredChain proto.InternalMessageInfo
 
-func (m *MsgCreateMonitoredChains) GetCreator() string {
+func (m *MsgCreateMonitoredChain) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateMonitoredChains) GetChainId() string {
+func (m *MsgCreateMonitoredChain) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-func (m *MsgCreateMonitoredChains) GetConnectionId() string {
+func (m *MsgCreateMonitoredChain) GetConnectionId() string {
 	if m != nil {
 		return m.ConnectionId
 	}
 	return ""
 }
 
-type MsgCreateMonitoredChainsResponse struct {
+type MsgCreateMonitoredChainResponse struct {
 }
 
-func (m *MsgCreateMonitoredChainsResponse) Reset()         { *m = MsgCreateMonitoredChainsResponse{} }
-func (m *MsgCreateMonitoredChainsResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateMonitoredChainsResponse) ProtoMessage()    {}
-func (*MsgCreateMonitoredChainsResponse) Descriptor() ([]byte, []int) {
+func (m *MsgCreateMonitoredChainResponse) Reset()         { *m = MsgCreateMonitoredChainResponse{} }
+func (m *MsgCreateMonitoredChainResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateMonitoredChainResponse) ProtoMessage()    {}
+func (*MsgCreateMonitoredChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{1}
 }
-func (m *MsgCreateMonitoredChainsResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateMonitoredChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateMonitoredChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateMonitoredChainsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateMonitoredChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -111,36 +111,36 @@ func (m *MsgCreateMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateMonitoredChainsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateMonitoredChainsResponse.Merge(m, src)
+func (m *MsgCreateMonitoredChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateMonitoredChainResponse.Merge(m, src)
 }
-func (m *MsgCreateMonitoredChainsResponse) XXX_Size() int {
+func (m *MsgCreateMonitoredChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateMonitoredChainsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateMonitoredChainsResponse.DiscardUnknown(m)
+func (m *MsgCreateMonitoredChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateMonitoredChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateMonitoredChainsResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateMonitoredChainResponse proto.InternalMessageInfo
 
-type MsgUpdateMonitoredChains struct {
+type MsgUpdateMonitoredChain struct {
 	Creator      string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ChainId      string `protobuf:"bytes,2,opt,name=chainId,proto3" json:"chainId,omitempty"`
 	ConnectionId string `protobuf:"bytes,3,opt,name=connectionId,proto3" json:"connectionId,omitempty"`
 }
 
-func (m *MsgUpdateMonitoredChains) Reset()         { *m = MsgUpdateMonitoredChains{} }
-func (m *MsgUpdateMonitoredChains) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateMonitoredChains) ProtoMessage()    {}
-func (*MsgUpdateMonitoredChains) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateMonitoredChain) Reset()         { *m = MsgUpdateMonitoredChain{} }
+func (m *MsgUpdateMonitoredChain) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateMonitoredChain) ProtoMessage()    {}
+func (*MsgUpdateMonitoredChain) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{2}
 }
-func (m *MsgUpdateMonitoredChains) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateMonitoredChain) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateMonitoredChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateMonitoredChains.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateMonitoredChain.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -150,54 +150,54 @@ func (m *MsgUpdateMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateMonitoredChains) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateMonitoredChains.Merge(m, src)
+func (m *MsgUpdateMonitoredChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateMonitoredChain.Merge(m, src)
 }
-func (m *MsgUpdateMonitoredChains) XXX_Size() int {
+func (m *MsgUpdateMonitoredChain) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateMonitoredChains) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateMonitoredChains.DiscardUnknown(m)
+func (m *MsgUpdateMonitoredChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateMonitoredChain.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateMonitoredChains proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateMonitoredChain proto.InternalMessageInfo
 
-func (m *MsgUpdateMonitoredChains) GetCreator() string {
+func (m *MsgUpdateMonitoredChain) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgUpdateMonitoredChains) GetChainId() string {
+func (m *MsgUpdateMonitoredChain) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-func (m *MsgUpdateMonitoredChains) GetConnectionId() string {
+func (m *MsgUpdateMonitoredChain) GetConnectionId() string {
 	if m != nil {
 		return m.ConnectionId
 	}
 	return ""
 }
 
-type MsgUpdateMonitoredChainsResponse struct {
+type MsgUpdateMonitoredChainResponse struct {
 }
 
-func (m *MsgUpdateMonitoredChainsResponse) Reset()         { *m = MsgUpdateMonitoredChainsResponse{} }
-func (m *MsgUpdateMonitoredChainsResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateMonitoredChainsResponse) ProtoMessage()    {}
-func (*MsgUpdateMonitoredChainsResponse) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateMonitoredChainResponse) Reset()         { *m = MsgUpdateMonitoredChainResponse{} }
+func (m *MsgUpdateMonitoredChainResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateMonitoredChainResponse) ProtoMessage()    {}
+func (*MsgUpdateMonitoredChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{3}
 }
-func (m *MsgUpdateMonitoredChainsResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateMonitoredChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateMonitoredChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateMonitoredChainsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateMonitoredChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -207,35 +207,35 @@ func (m *MsgUpdateMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateMonitoredChainsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateMonitoredChainsResponse.Merge(m, src)
+func (m *MsgUpdateMonitoredChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateMonitoredChainResponse.Merge(m, src)
 }
-func (m *MsgUpdateMonitoredChainsResponse) XXX_Size() int {
+func (m *MsgUpdateMonitoredChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateMonitoredChainsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateMonitoredChainsResponse.DiscardUnknown(m)
+func (m *MsgUpdateMonitoredChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateMonitoredChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateMonitoredChainsResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateMonitoredChainResponse proto.InternalMessageInfo
 
-type MsgDeleteMonitoredChains struct {
+type MsgDeleteMonitoredChain struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ChainId string `protobuf:"bytes,2,opt,name=chainId,proto3" json:"chainId,omitempty"`
 }
 
-func (m *MsgDeleteMonitoredChains) Reset()         { *m = MsgDeleteMonitoredChains{} }
-func (m *MsgDeleteMonitoredChains) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteMonitoredChains) ProtoMessage()    {}
-func (*MsgDeleteMonitoredChains) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteMonitoredChain) Reset()         { *m = MsgDeleteMonitoredChain{} }
+func (m *MsgDeleteMonitoredChain) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteMonitoredChain) ProtoMessage()    {}
+func (*MsgDeleteMonitoredChain) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{4}
 }
-func (m *MsgDeleteMonitoredChains) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteMonitoredChain) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteMonitoredChain) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteMonitoredChains.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteMonitoredChain.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -245,47 +245,47 @@ func (m *MsgDeleteMonitoredChains) XXX_Marshal(b []byte, deterministic bool) ([]
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteMonitoredChains) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteMonitoredChains.Merge(m, src)
+func (m *MsgDeleteMonitoredChain) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteMonitoredChain.Merge(m, src)
 }
-func (m *MsgDeleteMonitoredChains) XXX_Size() int {
+func (m *MsgDeleteMonitoredChain) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteMonitoredChains) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteMonitoredChains.DiscardUnknown(m)
+func (m *MsgDeleteMonitoredChain) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteMonitoredChain.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteMonitoredChains proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteMonitoredChain proto.InternalMessageInfo
 
-func (m *MsgDeleteMonitoredChains) GetCreator() string {
+func (m *MsgDeleteMonitoredChain) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgDeleteMonitoredChains) GetChainId() string {
+func (m *MsgDeleteMonitoredChain) GetChainId() string {
 	if m != nil {
 		return m.ChainId
 	}
 	return ""
 }
 
-type MsgDeleteMonitoredChainsResponse struct {
+type MsgDeleteMonitoredChainResponse struct {
 }
 
-func (m *MsgDeleteMonitoredChainsResponse) Reset()         { *m = MsgDeleteMonitoredChainsResponse{} }
-func (m *MsgDeleteMonitoredChainsResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteMonitoredChainsResponse) ProtoMessage()    {}
-func (*MsgDeleteMonitoredChainsResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteMonitoredChainResponse) Reset()         { *m = MsgDeleteMonitoredChainResponse{} }
+func (m *MsgDeleteMonitoredChainResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteMonitoredChainResponse) ProtoMessage()    {}
+func (*MsgDeleteMonitoredChainResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_244719d9e7f65721, []int{5}
 }
-func (m *MsgDeleteMonitoredChainsResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteMonitoredChainResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteMonitoredChainResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteMonitoredChainsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteMonitoredChainResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -295,50 +295,49 @@ func (m *MsgDeleteMonitoredChainsResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteMonitoredChainsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteMonitoredChainsResponse.Merge(m, src)
+func (m *MsgDeleteMonitoredChainResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteMonitoredChainResponse.Merge(m, src)
 }
-func (m *MsgDeleteMonitoredChainsResponse) XXX_Size() int {
+func (m *MsgDeleteMonitoredChainResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteMonitoredChainsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteMonitoredChainsResponse.DiscardUnknown(m)
+func (m *MsgDeleteMonitoredChainResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteMonitoredChainResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteMonitoredChainsResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteMonitoredChainResponse proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*MsgCreateMonitoredChains)(nil), "healthcheck.healthcheck.MsgCreateMonitoredChains")
-	proto.RegisterType((*MsgCreateMonitoredChainsResponse)(nil), "healthcheck.healthcheck.MsgCreateMonitoredChainsResponse")
-	proto.RegisterType((*MsgUpdateMonitoredChains)(nil), "healthcheck.healthcheck.MsgUpdateMonitoredChains")
-	proto.RegisterType((*MsgUpdateMonitoredChainsResponse)(nil), "healthcheck.healthcheck.MsgUpdateMonitoredChainsResponse")
-	proto.RegisterType((*MsgDeleteMonitoredChains)(nil), "healthcheck.healthcheck.MsgDeleteMonitoredChains")
-	proto.RegisterType((*MsgDeleteMonitoredChainsResponse)(nil), "healthcheck.healthcheck.MsgDeleteMonitoredChainsResponse")
+	proto.RegisterType((*MsgCreateMonitoredChain)(nil), "healthcheck.healthcheck.MsgCreateMonitoredChain")
+	proto.RegisterType((*MsgCreateMonitoredChainResponse)(nil), "healthcheck.healthcheck.MsgCreateMonitoredChainResponse")
+	proto.RegisterType((*MsgUpdateMonitoredChain)(nil), "healthcheck.healthcheck.MsgUpdateMonitoredChain")
+	proto.RegisterType((*MsgUpdateMonitoredChainResponse)(nil), "healthcheck.healthcheck.MsgUpdateMonitoredChainResponse")
+	proto.RegisterType((*MsgDeleteMonitoredChain)(nil), "healthcheck.healthcheck.MsgDeleteMonitoredChain")
+	proto.RegisterType((*MsgDeleteMonitoredChainResponse)(nil), "healthcheck.healthcheck.MsgDeleteMonitoredChainResponse")
 }
 
 func init() { proto.RegisterFile("healthcheck/healthcheck/tx.proto", fileDescriptor_244719d9e7f65721) }
 
 var fileDescriptor_244719d9e7f65721 = []byte{
-	// 294 bytes of a gzipped FileDescriptorProto
+	// 280 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0xc8, 0x48, 0x4d, 0xcc,
 	0x29, 0xc9, 0x48, 0xce, 0x48, 0x4d, 0xce, 0xd6, 0x47, 0x66, 0x97, 0x54, 0xe8, 0x15, 0x14, 0xe5,
-	0x97, 0xe4, 0x0b, 0x89, 0x23, 0x89, 0xea, 0x21, 0xb1, 0xa5, 0xf4, 0x70, 0x69, 0xcd, 0xcd, 0xcf,
-	0xcb, 0x2c, 0xc9, 0x2f, 0x4a, 0x4d, 0x89, 0x4f, 0xce, 0x48, 0xcc, 0xcc, 0x2b, 0x86, 0x18, 0xa4,
-	0x54, 0xc4, 0x25, 0xe1, 0x5b, 0x9c, 0xee, 0x5c, 0x94, 0x9a, 0x58, 0x92, 0xea, 0x0b, 0x53, 0xe2,
-	0x0c, 0x56, 0x21, 0x24, 0xc1, 0xc5, 0x9e, 0x0c, 0x92, 0xc8, 0x2f, 0x92, 0x60, 0x54, 0x60, 0xd4,
-	0xe0, 0x0c, 0x82, 0x71, 0xc1, 0x32, 0x20, 0x35, 0x9e, 0x29, 0x12, 0x4c, 0x50, 0x19, 0x08, 0x57,
-	0x48, 0x89, 0x8b, 0x27, 0x39, 0x3f, 0x2f, 0x2f, 0x35, 0xb9, 0x24, 0x33, 0x1f, 0x24, 0xcd, 0x0c,
-	0x96, 0x46, 0x11, 0x53, 0x52, 0xe2, 0x52, 0xc0, 0x65, 0x67, 0x50, 0x6a, 0x71, 0x41, 0x7e, 0x5e,
-	0x71, 0x2a, 0xd4, 0x5d, 0xa1, 0x05, 0x29, 0x74, 0x77, 0x17, 0x56, 0x3b, 0xe1, 0xee, 0xf2, 0x03,
-	0xbb, 0xcb, 0x25, 0x35, 0x27, 0x95, 0x2a, 0xee, 0x82, 0xda, 0x89, 0xd5, 0x3c, 0x98, 0x9d, 0x46,
-	0x73, 0x99, 0xb9, 0x98, 0x7d, 0x8b, 0xd3, 0x85, 0x5a, 0x19, 0xb9, 0x44, 0xb1, 0xc7, 0x94, 0xa1,
-	0x1e, 0x8e, 0xf4, 0xa0, 0x87, 0x2b, 0xa0, 0xa5, 0x2c, 0x49, 0xd6, 0x02, 0x73, 0x0f, 0xd8, 0x1d,
-	0xd8, 0x63, 0x06, 0xaf, 0x3b, 0xb0, 0x6a, 0xc1, 0xef, 0x0e, 0xbc, 0x71, 0x01, 0x76, 0x07, 0xf6,
-	0x98, 0xc0, 0xeb, 0x0e, 0xac, 0x5a, 0xf0, 0xbb, 0x03, 0x6f, 0xfc, 0x38, 0x59, 0x9e, 0x78, 0x24,
-	0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78,
-	0x2c, 0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x3c, 0x72, 0x0e, 0xac, 0x40, 0xcd, 0xca, 0x95,
-	0x05, 0xa9, 0xc5, 0x49, 0x6c, 0xe0, 0x5c, 0x68, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x41, 0x66,
-	0xb3, 0xf4, 0xf2, 0x03, 0x00, 0x00,
+	0x97, 0xe4, 0x0b, 0x89, 0x23, 0x89, 0xea, 0x21, 0xb1, 0x95, 0x0a, 0xb9, 0xc4, 0x7d, 0x8b, 0xd3,
+	0x9d, 0x8b, 0x52, 0x13, 0x4b, 0x52, 0x7d, 0xf3, 0xf3, 0x32, 0x4b, 0xf2, 0x8b, 0x52, 0x53, 0x9c,
+	0x33, 0x12, 0x33, 0xf3, 0x84, 0x24, 0xb8, 0xd8, 0x93, 0x41, 0xe2, 0xf9, 0x45, 0x12, 0x8c, 0x0a,
+	0x8c, 0x1a, 0x9c, 0x41, 0x30, 0x2e, 0x58, 0x06, 0xa4, 0xc4, 0x33, 0x45, 0x82, 0x09, 0x2a, 0x03,
+	0xe1, 0x0a, 0x29, 0x71, 0xf1, 0x24, 0xe7, 0xe7, 0xe5, 0xa5, 0x26, 0x97, 0x64, 0xe6, 0x83, 0xa4,
+	0x99, 0xc1, 0xd2, 0x28, 0x62, 0x4a, 0x8a, 0x5c, 0xf2, 0x38, 0xac, 0x0c, 0x4a, 0x2d, 0x2e, 0xc8,
+	0xcf, 0x2b, 0x4e, 0x85, 0xba, 0x2a, 0xb4, 0x20, 0x85, 0xde, 0xae, 0xc2, 0x66, 0x25, 0xdc, 0x55,
+	0xbe, 0x60, 0x57, 0xb9, 0xa4, 0xe6, 0xa4, 0x52, 0xc3, 0x55, 0x50, 0x1b, 0xb1, 0x19, 0x07, 0xb3,
+	0xd1, 0x68, 0x0a, 0x33, 0x17, 0xb3, 0x6f, 0x71, 0xba, 0x50, 0x13, 0x23, 0x97, 0x08, 0xd6, 0x38,
+	0x32, 0xd0, 0xc3, 0x11, 0xb1, 0x7a, 0x38, 0x82, 0x58, 0xca, 0x82, 0x54, 0x1d, 0x30, 0xc7, 0x80,
+	0x1d, 0x81, 0x35, 0x4a, 0xf0, 0x3a, 0x02, 0x9b, 0x0e, 0xfc, 0x8e, 0xc0, 0x17, 0x07, 0x60, 0x47,
+	0x60, 0x8d, 0x01, 0xbc, 0x8e, 0xc0, 0xa6, 0x03, 0xbf, 0x23, 0xf0, 0x45, 0x8b, 0x93, 0xe5, 0x89,
+	0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c, 0xc3,
+	0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0xc9, 0x23, 0xe7, 0xbe, 0x0a, 0xd4, 0xbc,
+	0x58, 0x59, 0x90, 0x5a, 0x9c, 0xc4, 0x06, 0xce, 0x8f, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0x09, 0xa0, 0xe3, 0x83, 0xb3, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -353,9 +352,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	CreateMonitoredChains(ctx context.Context, in *MsgCreateMonitoredChains, opts ...grpc.CallOption) (*MsgCreateMonitoredChainsResponse, error)
-	UpdateMonitoredChains(ctx context.Context, in *MsgUpdateMonitoredChains, opts ...grpc.CallOption) (*MsgUpdateMonitoredChainsResponse, error)
-	DeleteMonitoredChains(ctx context.Context, in *MsgDeleteMonitoredChains, opts ...grpc.CallOption) (*MsgDeleteMonitoredChainsResponse, error)
+	CreateMonitoredChain(ctx context.Context, in *MsgCreateMonitoredChain, opts ...grpc.CallOption) (*MsgCreateMonitoredChainResponse, error)
+	UpdateMonitoredChain(ctx context.Context, in *MsgUpdateMonitoredChain, opts ...grpc.CallOption) (*MsgUpdateMonitoredChainResponse, error)
+	DeleteMonitoredChain(ctx context.Context, in *MsgDeleteMonitoredChain, opts ...grpc.CallOption) (*MsgDeleteMonitoredChainResponse, error)
 }
 
 type msgClient struct {
@@ -366,27 +365,27 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) CreateMonitoredChains(ctx context.Context, in *MsgCreateMonitoredChains, opts ...grpc.CallOption) (*MsgCreateMonitoredChainsResponse, error) {
-	out := new(MsgCreateMonitoredChainsResponse)
-	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/CreateMonitoredChains", in, out, opts...)
+func (c *msgClient) CreateMonitoredChain(ctx context.Context, in *MsgCreateMonitoredChain, opts ...grpc.CallOption) (*MsgCreateMonitoredChainResponse, error) {
+	out := new(MsgCreateMonitoredChainResponse)
+	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/CreateMonitoredChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) UpdateMonitoredChains(ctx context.Context, in *MsgUpdateMonitoredChains, opts ...grpc.CallOption) (*MsgUpdateMonitoredChainsResponse, error) {
-	out := new(MsgUpdateMonitoredChainsResponse)
-	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/UpdateMonitoredChains", in, out, opts...)
+func (c *msgClient) UpdateMonitoredChain(ctx context.Context, in *MsgUpdateMonitoredChain, opts ...grpc.CallOption) (*MsgUpdateMonitoredChainResponse, error) {
+	out := new(MsgUpdateMonitoredChainResponse)
+	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/UpdateMonitoredChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) DeleteMonitoredChains(ctx context.Context, in *MsgDeleteMonitoredChains, opts ...grpc.CallOption) (*MsgDeleteMonitoredChainsResponse, error) {
-	out := new(MsgDeleteMonitoredChainsResponse)
-	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/DeleteMonitoredChains", in, out, opts...)
+func (c *msgClient) DeleteMonitoredChain(ctx context.Context, in *MsgDeleteMonitoredChain, opts ...grpc.CallOption) (*MsgDeleteMonitoredChainResponse, error) {
+	out := new(MsgDeleteMonitoredChainResponse)
+	err := c.cc.Invoke(ctx, "/healthcheck.healthcheck.Msg/DeleteMonitoredChain", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -395,79 +394,79 @@ func (c *msgClient) DeleteMonitoredChains(ctx context.Context, in *MsgDeleteMoni
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	CreateMonitoredChains(context.Context, *MsgCreateMonitoredChains) (*MsgCreateMonitoredChainsResponse, error)
-	UpdateMonitoredChains(context.Context, *MsgUpdateMonitoredChains) (*MsgUpdateMonitoredChainsResponse, error)
-	DeleteMonitoredChains(context.Context, *MsgDeleteMonitoredChains) (*MsgDeleteMonitoredChainsResponse, error)
+	CreateMonitoredChain(context.Context, *MsgCreateMonitoredChain) (*MsgCreateMonitoredChainResponse, error)
+	UpdateMonitoredChain(context.Context, *MsgUpdateMonitoredChain) (*MsgUpdateMonitoredChainResponse, error)
+	DeleteMonitoredChain(context.Context, *MsgDeleteMonitoredChain) (*MsgDeleteMonitoredChainResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) CreateMonitoredChains(ctx context.Context, req *MsgCreateMonitoredChains) (*MsgCreateMonitoredChainsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMonitoredChains not implemented")
+func (*UnimplementedMsgServer) CreateMonitoredChain(ctx context.Context, req *MsgCreateMonitoredChain) (*MsgCreateMonitoredChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMonitoredChain not implemented")
 }
-func (*UnimplementedMsgServer) UpdateMonitoredChains(ctx context.Context, req *MsgUpdateMonitoredChains) (*MsgUpdateMonitoredChainsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMonitoredChains not implemented")
+func (*UnimplementedMsgServer) UpdateMonitoredChain(ctx context.Context, req *MsgUpdateMonitoredChain) (*MsgUpdateMonitoredChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMonitoredChain not implemented")
 }
-func (*UnimplementedMsgServer) DeleteMonitoredChains(ctx context.Context, req *MsgDeleteMonitoredChains) (*MsgDeleteMonitoredChainsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMonitoredChains not implemented")
+func (*UnimplementedMsgServer) DeleteMonitoredChain(ctx context.Context, req *MsgDeleteMonitoredChain) (*MsgDeleteMonitoredChainResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMonitoredChain not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_CreateMonitoredChains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateMonitoredChains)
+func _Msg_CreateMonitoredChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateMonitoredChain)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).CreateMonitoredChains(ctx, in)
+		return srv.(MsgServer).CreateMonitoredChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/healthcheck.healthcheck.Msg/CreateMonitoredChains",
+		FullMethod: "/healthcheck.healthcheck.Msg/CreateMonitoredChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateMonitoredChains(ctx, req.(*MsgCreateMonitoredChains))
+		return srv.(MsgServer).CreateMonitoredChain(ctx, req.(*MsgCreateMonitoredChain))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_UpdateMonitoredChains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateMonitoredChains)
+func _Msg_UpdateMonitoredChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateMonitoredChain)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).UpdateMonitoredChains(ctx, in)
+		return srv.(MsgServer).UpdateMonitoredChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/healthcheck.healthcheck.Msg/UpdateMonitoredChains",
+		FullMethod: "/healthcheck.healthcheck.Msg/UpdateMonitoredChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateMonitoredChains(ctx, req.(*MsgUpdateMonitoredChains))
+		return srv.(MsgServer).UpdateMonitoredChain(ctx, req.(*MsgUpdateMonitoredChain))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_DeleteMonitoredChains_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteMonitoredChains)
+func _Msg_DeleteMonitoredChain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteMonitoredChain)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).DeleteMonitoredChains(ctx, in)
+		return srv.(MsgServer).DeleteMonitoredChain(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/healthcheck.healthcheck.Msg/DeleteMonitoredChains",
+		FullMethod: "/healthcheck.healthcheck.Msg/DeleteMonitoredChain",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteMonitoredChains(ctx, req.(*MsgDeleteMonitoredChains))
+		return srv.(MsgServer).DeleteMonitoredChain(ctx, req.(*MsgDeleteMonitoredChain))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -477,23 +476,23 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateMonitoredChains",
-			Handler:    _Msg_CreateMonitoredChains_Handler,
+			MethodName: "CreateMonitoredChain",
+			Handler:    _Msg_CreateMonitoredChain_Handler,
 		},
 		{
-			MethodName: "UpdateMonitoredChains",
-			Handler:    _Msg_UpdateMonitoredChains_Handler,
+			MethodName: "UpdateMonitoredChain",
+			Handler:    _Msg_UpdateMonitoredChain_Handler,
 		},
 		{
-			MethodName: "DeleteMonitoredChains",
-			Handler:    _Msg_DeleteMonitoredChains_Handler,
+			MethodName: "DeleteMonitoredChain",
+			Handler:    _Msg_DeleteMonitoredChain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "healthcheck/healthcheck/tx.proto",
 }
 
-func (m *MsgCreateMonitoredChains) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateMonitoredChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -503,12 +502,12 @@ func (m *MsgCreateMonitoredChains) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateMonitoredChains) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateMonitoredChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateMonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -537,7 +536,7 @@ func (m *MsgCreateMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateMonitoredChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -547,12 +546,12 @@ func (m *MsgCreateMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateMonitoredChainsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateMonitoredChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateMonitoredChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -560,7 +559,7 @@ func (m *MsgCreateMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateMonitoredChains) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateMonitoredChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -570,12 +569,12 @@ func (m *MsgUpdateMonitoredChains) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateMonitoredChains) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateMonitoredChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateMonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -604,7 +603,7 @@ func (m *MsgUpdateMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateMonitoredChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -614,12 +613,12 @@ func (m *MsgUpdateMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateMonitoredChainsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateMonitoredChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateMonitoredChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -627,7 +626,7 @@ func (m *MsgUpdateMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteMonitoredChains) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteMonitoredChain) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -637,12 +636,12 @@ func (m *MsgDeleteMonitoredChains) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteMonitoredChains) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteMonitoredChain) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteMonitoredChain) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -664,7 +663,7 @@ func (m *MsgDeleteMonitoredChains) MarshalToSizedBuffer(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteMonitoredChainResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -674,12 +673,12 @@ func (m *MsgDeleteMonitoredChainsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteMonitoredChainsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteMonitoredChainResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteMonitoredChainsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteMonitoredChainResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -698,7 +697,7 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgCreateMonitoredChains) Size() (n int) {
+func (m *MsgCreateMonitoredChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -719,7 +718,7 @@ func (m *MsgCreateMonitoredChains) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateMonitoredChainsResponse) Size() (n int) {
+func (m *MsgCreateMonitoredChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -728,7 +727,7 @@ func (m *MsgCreateMonitoredChainsResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateMonitoredChains) Size() (n int) {
+func (m *MsgUpdateMonitoredChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -749,7 +748,7 @@ func (m *MsgUpdateMonitoredChains) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateMonitoredChainsResponse) Size() (n int) {
+func (m *MsgUpdateMonitoredChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -758,7 +757,7 @@ func (m *MsgUpdateMonitoredChainsResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteMonitoredChains) Size() (n int) {
+func (m *MsgDeleteMonitoredChain) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -775,7 +774,7 @@ func (m *MsgDeleteMonitoredChains) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteMonitoredChainsResponse) Size() (n int) {
+func (m *MsgDeleteMonitoredChainResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -790,7 +789,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgCreateMonitoredChains) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateMonitoredChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -813,10 +812,10 @@ func (m *MsgCreateMonitoredChains) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateMonitoredChains: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateMonitoredChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateMonitoredChains: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateMonitoredChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -936,7 +935,7 @@ func (m *MsgCreateMonitoredChains) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateMonitoredChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -959,10 +958,10 @@ func (m *MsgCreateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateMonitoredChainsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateMonitoredChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateMonitoredChainsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateMonitoredChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -986,7 +985,7 @@ func (m *MsgCreateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateMonitoredChains) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateMonitoredChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1009,10 +1008,10 @@ func (m *MsgUpdateMonitoredChains) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateMonitoredChains: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateMonitoredChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateMonitoredChains: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateMonitoredChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1132,7 +1131,7 @@ func (m *MsgUpdateMonitoredChains) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateMonitoredChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1155,10 +1154,10 @@ func (m *MsgUpdateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateMonitoredChainsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateMonitoredChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateMonitoredChainsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateMonitoredChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -1182,7 +1181,7 @@ func (m *MsgUpdateMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteMonitoredChains) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteMonitoredChain) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1205,10 +1204,10 @@ func (m *MsgDeleteMonitoredChains) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteMonitoredChains: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteMonitoredChain: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteMonitoredChains: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteMonitoredChain: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1296,7 +1295,7 @@ func (m *MsgDeleteMonitoredChains) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteMonitoredChainResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1319,10 +1318,10 @@ func (m *MsgDeleteMonitoredChainsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteMonitoredChainsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteMonitoredChainResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteMonitoredChainsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteMonitoredChainResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
