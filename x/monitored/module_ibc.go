@@ -18,8 +18,8 @@ import (
 )
 
 const (
-	DefaultTimeoutInterval uint32 = 2
-	DefaultUpdateInterval  uint32 = 6
+	DefaultTimeoutInterval uint64 = 2
+	DefaultUpdateInterval  uint64 = 6
 )
 
 type IBCModule struct {
@@ -75,8 +75,6 @@ func (im IBCModule) OnChanOpenInit(
 		return "", sdkerrors.Wrapf(types.ErrInvalidHandshakeMetadata, "error marshalling ibc-try metadata: %v", err)
 	}
 
-	im.keeper.SetHealthcheckChannel(ctx, channelID)
-
 	return string(mdBz), nil
 }
 
@@ -112,6 +110,9 @@ func (im IBCModule) OnChanOpenAck(
 	if counterpartyVersion != commonTypes.Version {
 		return sdkerrors.Wrapf(types.ErrInvalidVersion, "invalid counterparty version: %s, expected %s", counterpartyVersion, commonTypes.Version)
 	}
+
+	im.keeper.SetHealthcheckChannel(ctx, channelID)
+
 	return nil
 }
 
@@ -149,24 +150,8 @@ func (im IBCModule) OnRecvPacket(
 	modulePacket channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) ibcexported.Acknowledgement {
-	var ack channeltypes.Acknowledgement
-
-	// this line is used by starport scaffolding # oracle/packet/module/recv
-
-	var modulePacketData types.MonitoredPacketData
-	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
-		return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error()))
-	}
-
-	// Dispatch packet
-	switch packet := modulePacketData.Packet.(type) {
-	// this line is used by starport scaffolding # ibc/packet/module/recv
-	default:
-		err := fmt.Errorf("unrecognized %s packet type: %T", types.ModuleName, packet)
-		return channeltypes.NewErrorAcknowledgement(err)
-	}
-
-	// NOTE: acknowledgement will be written synchronously during IBC handler execution.
+	err := sdkerrors.Wrapf(types.ErrInvalidChannelFlow, "cannot receive packet on monitored chain")
+	ack := channeltypes.NewErrorAcknowledgement(err)
 	return ack
 }
 
@@ -184,20 +169,12 @@ func (im IBCModule) OnAcknowledgementPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/ack
 
-	var modulePacketData types.MonitoredPacketData
+	var modulePacketData commonTypes.HealthcheckPacketData
 	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
 	}
 
 	var eventType string
-
-	// Dispatch packet
-	switch packet := modulePacketData.Packet.(type) {
-	// this line is used by starport scaffolding # ibc/packet/module/ack
-	default:
-		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
-		return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
-	}
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(
@@ -233,17 +210,9 @@ func (im IBCModule) OnTimeoutPacket(
 	modulePacket channeltypes.Packet,
 	relayer sdk.AccAddress,
 ) error {
-	var modulePacketData types.MonitoredPacketData
-	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
+	var packetData commonTypes.HealthcheckPacketData
+	if err := packetData.Unmarshal(modulePacket.GetData()); err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
-	}
-
-	// Dispatch packet
-	switch packet := modulePacketData.Packet.(type) {
-	// this line is used by starport scaffolding # ibc/packet/module/timeout
-	default:
-		errMsg := fmt.Sprintf("unrecognized %s packet type: %T", types.ModuleName, packet)
-		return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
 	}
 
 	return nil

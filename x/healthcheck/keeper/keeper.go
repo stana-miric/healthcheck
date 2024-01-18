@@ -3,6 +3,8 @@ package keeper
 import (
 	"fmt"
 
+	commonTypes "healthcheck/x/types"
+
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -141,4 +143,42 @@ func (k Keeper) GetClientChainIdFromConnection(ctx sdk.Context, connectionID str
 
 	chainID := clientState.(*ibctm.ClientState).ChainId
 	return chainID, nil
+}
+
+func (k Keeper) OnRecvHealthcheckPacket(ctx sdk.Context, channelID string, packetData commonTypes.HealthcheckPacketData) exported.Acknowledgement {
+	chainID, err := k.GetClientChainIdFromChannel(ctx, channelID)
+	if err != nil {
+		panic(fmt.Errorf("cannot get client id from chainnel: %s", chainID))
+	}
+
+	chain, found := k.GetMonitoredChain(ctx, chainID)
+	if !found {
+		panic(fmt.Errorf("monitored chain not registered: %s", chainID))
+	}
+
+	chain.Status.Block = packetData.GetHealtcheckUpdate().Block
+	chain.Status.Timestamp = packetData.GetHealtcheckUpdate().Timestamp
+	chain.Status.RegistryBlockHeight = uint64(ctx.BlockHeader().Height)
+	chain.Status.Status = string(types.Active)
+
+	k.SetMonitoredChain(ctx, chain)
+
+	ack := channeltypes.NewResultAcknowledgement([]byte{byte(1)})
+	return ack
+}
+
+func (k Keeper) CloseChannel(ctx sdk.Context, channelID string) {
+	portID := k.GetPort(ctx)
+	channel, found := k.channelKeeper.GetChannel(ctx, portID, channelID)
+	if found && channel.State != channeltypes.CLOSED {
+		capName := host.ChannelCapabilityPath(portID, channelID)
+		chanCap, ok := k.scopedKeeper.GetCapability(ctx, capName)
+		if !ok {
+			k.Logger(ctx).Error("could not retrieve channel capability at: %s", capName)
+		}
+
+		if err := k.channelKeeper.ChanCloseInit(ctx, portID, channelID, chanCap); err != nil {
+			k.Logger(ctx).Error("could not close the monitored chain channel: %s", channelID)
+		}
+	}
 }

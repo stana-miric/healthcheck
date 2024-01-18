@@ -88,7 +88,7 @@ func (k Keeper) GetChainToChannel(ctx sdk.Context, chainID string) (string, bool
 	return string(bz), true
 }
 
-func (k Keeper) InitializeMonitoredChain(ctx sdk.Context, connectionID string, timeoutInterval, updateInterval uint32) error {
+func (k Keeper) InitializeMonitoredChain(ctx sdk.Context, connectionID string, timeoutInterval, updateInterval uint64) error {
 
 	chainID, err := k.GetClientChainIdFromConnection(ctx, connectionID)
 	if err != nil {
@@ -105,18 +105,13 @@ func (k Keeper) InitializeMonitoredChain(ctx sdk.Context, connectionID string, t
 		return sdkerrors.Wrapf(types.ErrInvalidConnection, "connection-id: %s", connectionID)
 	}
 
-	var updatedChain = types.MonitoredChain{
-		Creator:         chain.Creator,
-		ChainId:         chain.ChainId,
-		ConnectionId:    chain.ConnectionId,
-		TimeoutInterval: timeoutInterval,
-		UpdateInterval:  updateInterval,
-		Status: &types.MonitoredChainStatus{
-			Status: "inactive",
-		},
+	chain.TimeoutInterval = timeoutInterval
+	chain.UpdateInterval = updateInterval
+	chain.Status = &types.MonitoredChainStatus{
+		Status: string(types.Inactive),
 	}
 
-	k.SetMonitoredChain(ctx, updatedChain)
+	k.SetMonitoredChain(ctx, chain)
 
 	return nil
 }

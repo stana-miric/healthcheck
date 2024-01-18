@@ -6,6 +6,6 @@ option go_package = "healthcheck/x/types";
 message HandshakeMetadata {
   
   string version = 1; 
-  uint32 updateInterval = 2; 
-  uint32 timeoutInterval = 3; 
+  uint64 updateInterval = 2; 
+  uint64 timeoutInterval = 3; 
 }

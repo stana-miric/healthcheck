@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	// this line is used by starport scaffolding # 1
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -11,15 +12,16 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
+	"healthcheck/x/healthcheck/client/cli"
+	"healthcheck/x/healthcheck/keeper"
+	"healthcheck/x/healthcheck/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"healthcheck/x/healthcheck/client/cli"
-	"healthcheck/x/healthcheck/keeper"
-	"healthcheck/x/healthcheck/types"
 )
 
 var (
@@ -156,6 +158,24 @@ func (AppModule) ConsensusVersion() uint64 { return 1 }
 func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
-func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	chains := am.keeper.GetAllMonitoredChain(ctx)
+	curentBlock := uint64(ctx.BlockHeader().Height)
+
+	for _, chain := range chains {
+		lastCheckinBlock := chain.Status.RegistryBlockHeight
+		if curentBlock > lastCheckinBlock+chain.UpdateInterval {
+			if curentBlock > lastCheckinBlock+chain.TimeoutInterval {
+				channelID, ok := am.keeper.GetChainToChannel(ctx, chain.ChainId)
+				if ok {
+					am.keeper.CloseChannel(ctx, channelID)
+				}
+			}
+
+			chain.Status.Status = string(types.Inactive)
+			am.keeper.SetMonitoredChain(ctx, chain)
+		}
+	}
+
 	return []abci.ValidatorUpdate{}
 }

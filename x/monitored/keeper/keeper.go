@@ -2,6 +2,9 @@ package keeper
 
 import (
 	"fmt"
+	"time"
+
+	commonTypes "healthcheck/x/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
@@ -9,6 +12,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
@@ -57,16 +61,37 @@ func NewKeeper(
 	}
 }
 
-// SetHealthcheckChannel sets the channelID for the channel to the healtcheck.
-func (k Keeper) GetHealthcheckChannel(ctx sdk.Context) string {
+// SetHealthcheckChannel sets the the healthcheck channel
+func (k Keeper) GetHealthcheckChannel(ctx sdk.Context) (string, bool) {
 	store := ctx.KVStore(k.storeKey)
-	return string(store.Get(types.HealthcheckChannelKey))
+	channelIdBytes := store.Get(types.HealthcheckChannelKey)
+	if len(channelIdBytes) == 0 {
+		return "", false
+	}
+	return string(channelIdBytes), true
 }
 
-// SetPort sets the portID for the IBC app module. Used in InitGenesis
+// SetHealthcheckChannel gets the the healthcheck channel
 func (k Keeper) SetHealthcheckChannel(ctx sdk.Context, channelID string) {
 	store := ctx.KVStore(k.storeKey)
 	store.Set(types.HealthcheckChannelKey, []byte(channelID))
+}
+
+// GetLastCheckin gets the the last checkin info
+func (k Keeper) GetLastCheckin(ctx sdk.Context) (uint64, bool) {
+	store := ctx.KVStore(k.storeKey)
+	bz := store.Get(types.LastCheckinKey)
+	if bz == nil {
+		return 0, false
+	}
+	return sdk.BigEndianToUint64(bz), false
+}
+
+// SetLastCheckin sets the the last checkin info
+func (k Keeper) SetLastCheckin(ctx sdk.Context, lastCheckin uint64) {
+	store := ctx.KVStore(k.storeKey)
+	bz := sdk.Uint64ToBigEndian(lastCheckin)
+	store.Set(types.LastCheckinKey, bz)
 }
 
 // ----------------------------------------------------------------------------
@@ -121,4 +146,33 @@ func (k Keeper) ClaimCapability(ctx sdk.Context, cap *capabilitytypes.Capability
 
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
+}
+
+func (k Keeper) SendIBCPacket(ctx sdk.Context, packetData commonTypes.HealthcheckUpdateData) bool {
+	channelID, ok := k.GetHealthcheckChannel(ctx)
+	if !ok {
+		return false
+	}
+
+	portId := k.GetPort(ctx)
+	channelCap, ok := k.scopedKeeper.GetCapability(ctx, host.ChannelCapabilityPath(portId, channelID))
+	if !ok {
+		return false
+	}
+
+	packet, err := packetData.Marshal()
+	if err != nil {
+		return false
+	}
+
+	k.channelKeeper.SendPacket(ctx,
+		channelCap,
+		portId,
+		channelID,
+		clienttypes.Height{}, //  timeout height disabled
+		uint64(ctx.BlockTime().Add(time.Hour).UnixNano()), // timeout timestamp
+		packet,
+	)
+
+	return true
 }

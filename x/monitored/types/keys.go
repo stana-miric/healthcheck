@@ -16,8 +16,11 @@ const (
 
 var (
 	// PortKey defines the key to store the port ID in store
-	PortKey               = KeyPrefix("monitored-port-")
+	PortKey = KeyPrefix("monitored-port-")
+	// HealthcheckChannelKey defines the key to store the channel for communication with the healthcheck chain
 	HealthcheckChannelKey = KeyPrefix("health-check-channel")
+	// LAstCheckinKey defines the key to store the last checkin infromation in the store
+	LastCheckinKey = KeyPrefix("health-check-channel")
 )
 
 func KeyPrefix(p string) []byte {

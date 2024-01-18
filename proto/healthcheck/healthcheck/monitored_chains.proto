@@ -7,15 +7,15 @@ message MonitoredChain {
   string chainId = 1; 
   string connectionId = 2; 
   string creator = 3;
-  uint32 timeoutInterval = 4;
-  uint32 updateInterval = 5;
+  uint64 timeoutInterval = 4;
+  uint64 updateInterval = 5;
   MonitoredChainStatus status = 6;
 }
 
 message MonitoredChainStatus {
   
   string status = 1; 
-  string timestamp = 2; 
-  uint32 block = 3; 
-  uint32 registryBlockHeight = 4; 
+  uint64 timestamp = 2; 
+  uint64 block = 3; 
+  uint64 registryBlockHeight = 4; 
 }

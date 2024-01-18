@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	// this line is used by starport scaffolding # 1
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -11,15 +12,18 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
+	"healthcheck/x/monitored/client/cli"
+	"healthcheck/x/monitored/keeper"
+	"healthcheck/x/monitored/types"
+
+	commonTypes "healthcheck/x/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"healthcheck/x/monitored/client/cli"
-	"healthcheck/x/monitored/keeper"
-	"healthcheck/x/monitored/types"
 )
 
 var (
@@ -156,6 +160,27 @@ func (AppModule) ConsensusVersion() uint64 { return 1 }
 func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
-func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+func (am AppModule) EndBlock(ctx sdk.Context, block abci.RequestEndBlock) []abci.ValidatorUpdate {
+
+	// if healthcheck channel is not set, dont send packets
+	_, ok := am.keeper.GetHealthcheckChannel(ctx)
+	if !ok {
+		return []abci.ValidatorUpdate{}
+	}
+
+	// if update interval is not reached, dont send packets
+	lastChekingBlock, ok := am.keeper.GetLastCheckin(ctx)
+	if ok && lastChekingBlock > uint64(block.Height)-uint64(DefaultUpdateInterval) {
+		return []abci.ValidatorUpdate{}
+	}
+
+	packetData := commonTypes.HealthcheckUpdateData{
+		Block:     uint64(block.Height),
+		Timestamp: uint64(ctx.BlockTime().UnixNano()),
+	}
+
+	am.keeper.SendIBCPacket(ctx, packetData)
+	am.keeper.SetLastCheckin(ctx, uint64(block.Height))
+
 	return []abci.ValidatorUpdate{}
 }

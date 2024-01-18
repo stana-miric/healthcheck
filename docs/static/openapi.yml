@@ -33890,11 +33890,11 @@ paths:
                     creator:
                       type: string
                     timeoutInterval:
-                      type: integer
-                      format: int64
+                      type: string
+                      format: uint64
                     updateInterval:
-                      type: integer
-                      format: int64
+                      type: string
+                      format: uint64
                     status:
                       type: object
                       properties:
@@ -33902,12 +33902,13 @@ paths:
                           type: string
                         timestamp:
                           type: string
+                          format: uint64
                         block:
-                          type: integer
-                          format: int64
+                          type: string
+                          format: uint64
                         registryBlockHeight:
-                          type: integer
-                          format: int64
+                          type: string
+                          format: uint64
               pagination:
                 type: object
                 properties:
@@ -34033,11 +34034,11 @@ paths:
                   creator:
                     type: string
                   timeoutInterval:
-                    type: integer
-                    format: int64
+                    type: string
+                    format: uint64
                   updateInterval:
-                    type: integer
-                    format: int64
+                    type: string
+                    format: uint64
                   status:
                     type: object
                     properties:
@@ -34045,12 +34046,13 @@ paths:
                         type: string
                       timestamp:
                         type: string
+                        format: uint64
                       block:
-                        type: integer
-                        format: int64
+                        type: string
+                        format: uint64
                       registryBlockHeight:
-                        type: integer
-                        format: int64
+                        type: string
+                        format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -70372,11 +70374,11 @@ definitions:
       creator:
         type: string
       timeoutInterval:
-        type: integer
-        format: int64
+        type: string
+        format: uint64
       updateInterval:
-        type: integer
-        format: int64
+        type: string
+        format: uint64
       status:
         type: object
         properties:
@@ -70384,12 +70386,13 @@ definitions:
             type: string
           timestamp:
             type: string
+            format: uint64
           block:
-            type: integer
-            format: int64
+            type: string
+            format: uint64
           registryBlockHeight:
-            type: integer
-            format: int64
+            type: string
+            format: uint64
   healthcheck.healthcheck.MonitoredChainStatus:
     type: object
     properties:
@@ -70397,12 +70400,13 @@ definitions:
         type: string
       timestamp:
         type: string
+        format: uint64
       block:
-        type: integer
-        format: int64
+        type: string
+        format: uint64
       registryBlockHeight:
-        type: integer
-        format: int64
+        type: string
+        format: uint64
   healthcheck.healthcheck.MsgCreateMonitoredChainResponse:
     type: object
   healthcheck.healthcheck.MsgDeleteMonitoredChainResponse:
@@ -70427,11 +70431,11 @@ definitions:
             creator:
               type: string
             timeoutInterval:
-              type: integer
-              format: int64
+              type: string
+              format: uint64
             updateInterval:
-              type: integer
-              format: int64
+              type: string
+              format: uint64
             status:
               type: object
               properties:
@@ -70439,12 +70443,13 @@ definitions:
                   type: string
                 timestamp:
                   type: string
+                  format: uint64
                 block:
-                  type: integer
-                  format: int64
+                  type: string
+                  format: uint64
                 registryBlockHeight:
-                  type: integer
-                  format: int64
+                  type: string
+                  format: uint64
       pagination:
         type: object
         properties:
@@ -70484,11 +70489,11 @@ definitions:
           creator:
             type: string
           timeoutInterval:
-            type: integer
-            format: int64
+            type: string
+            format: uint64
           updateInterval:
-            type: integer
-            format: int64
+            type: string
+            format: uint64
           status:
             type: object
             properties:
@@ -70496,12 +70501,13 @@ definitions:
                 type: string
               timestamp:
                 type: string
+                format: uint64
               block:
-                type: integer
-                format: int64
+                type: string
+                format: uint64
               registryBlockHeight:
-                type: integer
-                format: int64
+                type: string
+                format: uint64
   healthcheck.healthcheck.QueryParamsResponse:
     type: object
     properties:
