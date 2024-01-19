@@ -7,7 +7,7 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
 	app "healthcheck/app/register"
-	"healthcheck/cmd/registerd/cmd"
+	"healthcheck/cmd/registryd/cmd"
 )
 
 func main() {
