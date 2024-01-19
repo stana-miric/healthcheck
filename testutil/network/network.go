@@ -2,10 +2,9 @@ package network
 
 import (
 	"fmt"
+	app "healthcheck/app/monitored"
 	"testing"
 	"time"
-
-	"healthcheck/app"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"

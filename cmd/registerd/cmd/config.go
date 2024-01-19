@@ -3,7 +3,7 @@ package cmd
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"healthcheck/app"
+	app "healthcheck/app/register"
 )
 
 func initSDKConfig() {
