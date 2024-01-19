@@ -70,7 +70,7 @@ func (im IBCModule) OnChanOpenInit(
 		TimeoutInterval: DefaultTimeoutInterval,
 	}
 
-	mdBz, err := (&md).Marshal()
+	mdBz, err := types.ModuleCdc.MarshalJSON(&md)
 	if err != nil {
 		return "", sdkerrors.Wrapf(types.ErrInvalidHandshakeMetadata, "error marshalling ibc-try metadata: %v", err)
 	}
@@ -141,6 +141,7 @@ func (im IBCModule) OnChanCloseConfirm(
 	portID,
 	channelID string,
 ) error {
+	im.keeper.RemoveHealthcheckChannel(ctx, channelID)
 	return nil
 }
 

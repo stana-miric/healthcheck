@@ -163,8 +163,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 func (am AppModule) EndBlock(ctx sdk.Context, block abci.RequestEndBlock) []abci.ValidatorUpdate {
 
 	// if healthcheck channel is not set, dont send packets
-	_, ok := am.keeper.GetHealthcheckChannel(ctx)
-	if !ok {
+	if !am.keeper.IsHealthcheckChanOpen(ctx) {
 		return []abci.ValidatorUpdate{}
 	}
 

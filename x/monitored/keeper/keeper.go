@@ -77,6 +77,12 @@ func (k Keeper) SetHealthcheckChannel(ctx sdk.Context, channelID string) {
 	store.Set(types.HealthcheckChannelKey, []byte(channelID))
 }
 
+// RemoveHealthcheckChannel gets the the healthcheck channel
+func (k Keeper) RemoveHealthcheckChannel(ctx sdk.Context, channelID string) {
+	store := ctx.KVStore(k.storeKey)
+	store.Delete(types.HealthcheckChannelKey)
+}
+
 // GetLastCheckin gets the the last checkin info
 func (k Keeper) GetLastCheckin(ctx sdk.Context) (uint64, bool) {
 	store := ctx.KVStore(k.storeKey)
@@ -160,7 +166,7 @@ func (k Keeper) SendIBCPacket(ctx sdk.Context, packetData commonTypes.Healthchec
 		return false
 	}
 
-	packet, err := packetData.Marshal()
+	packet, err := types.ModuleCdc.MarshalJSON(&packetData)
 	if err != nil {
 		return false
 	}
@@ -175,4 +181,15 @@ func (k Keeper) SendIBCPacket(ctx sdk.Context, packetData commonTypes.Healthchec
 	)
 
 	return true
+}
+
+func (k Keeper) IsHealthcheckChanOpen(ctx sdk.Context) bool {
+	channelID, ok := k.GetHealthcheckChannel(ctx)
+	if !ok {
+		return false
+	}
+
+	channel, ok := k.channelKeeper.GetChannel(ctx, k.GetPort(ctx), channelID)
+
+	return ok && channel.State == channeltypes.OPEN
 }

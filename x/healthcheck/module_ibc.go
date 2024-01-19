@@ -63,7 +63,7 @@ func (im IBCModule) OnChanOpenTry(
 	}
 
 	var md commonTypes.HandshakeMetadata
-	if err := (&md).Unmarshal([]byte(handshakeMetadata)); err != nil {
+	if err := types.ModuleCdc.UnmarshalJSON([]byte(handshakeMetadata), &md); err != nil {
 		return "", sdkerrors.Wrapf(types.ErrInvalidHandshakeMetadata,
 			"error unmarshalling ibc-ack metadata: \n%v; \nmetadata: %v", err, handshakeMetadata)
 	}
@@ -107,7 +107,7 @@ func (im IBCModule) OnChanOpenConfirm(
 	}
 
 	// monitored chain id to channel id map is saved to be able to close the channel on chain healthcheck timeout
-	im.keeper.SetChainToChannel(ctx, chainID, channelID)
+	im.keeper.SetChainToChannelMap(ctx, chainID, channelID)
 
 	return nil
 }
@@ -142,7 +142,7 @@ func (im IBCModule) OnRecvPacket(
 	// this line is used by starport scaffolding # oracle/packet/module/recv
 
 	var packetData commonTypes.HealthcheckPacketData
-	if err := packetData.Unmarshal(modulePacket.GetData()); err != nil {
+	if err := types.ModuleCdc.UnmarshalJSON(modulePacket.GetData(), &packetData); err != nil {
 		return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error()))
 	} else {
 		ack = im.keeper.OnRecvHealthcheckPacket(ctx, modulePacket.DestinationChannel, packetData)

@@ -64,8 +64,8 @@ func (k Keeper) GetAllMonitoredChain(ctx sdk.Context) (list []types.MonitoredCha
 	return
 }
 
-// SetChainToChannel sets the mapping from a monitored chainID to the channel ID for that monitored chain.
-func (k Keeper) SetChainToChannel(ctx sdk.Context, chainID, channelID string) {
+// SetChainToChannelMap sets the mapping from a monitored chainID to the channel ID for that monitored chain.
+func (k Keeper) SetChainToChannelMap(ctx sdk.Context, chainID, channelID string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainToChannelKeyPrefix))
 	store.Set(types.ChainToChannelKey(
 		chainID,
@@ -74,8 +74,8 @@ func (k Keeper) SetChainToChannel(ctx sdk.Context, chainID, channelID string) {
 	store.Set(types.ChainToChannelKey(chainID), []byte(channelID))
 }
 
-// GetChainToChannel gets the channelID for the given moniotred chainID
-func (k Keeper) GetChainToChannel(ctx sdk.Context, chainID string) (string, bool) {
+// GetChainToChannelMap gets the channelID for the given moniotred chainID
+func (k Keeper) GetChainToChannelMap(ctx sdk.Context, chainID string) (string, bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainToChannelKeyPrefix))
 
 	bz := store.Get(types.ChainToChannelKey(
@@ -86,6 +86,13 @@ func (k Keeper) GetChainToChannel(ctx sdk.Context, chainID string) (string, bool
 	}
 
 	return string(bz), true
+}
+
+// RemoveChanFromChainToChannelMap removes the channelID for the given moniotred chainID
+func (k Keeper) RemoveChanFromChainToChannelMap(ctx sdk.Context, chainID string) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ChainToChannelKeyPrefix))
+
+	store.Delete(types.ChainToChannelKey(chainID))
 }
 
 func (k Keeper) InitializeMonitoredChain(ctx sdk.Context, connectionID string, timeoutInterval, updateInterval uint64) error {

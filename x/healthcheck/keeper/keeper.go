@@ -182,3 +182,14 @@ func (k Keeper) CloseChannel(ctx sdk.Context, channelID string) {
 		}
 	}
 }
+
+func (k Keeper) IsMonitoredChanOpen(ctx sdk.Context, chainId string) bool {
+	channelID, ok := k.GetChainToChannelMap(ctx, chainId)
+	if !ok {
+		return false
+	}
+
+	channel, ok := k.channelKeeper.GetChannel(ctx, k.GetPort(ctx), channelID)
+
+	return ok && channel.State == channeltypes.OPEN
+}
