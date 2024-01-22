@@ -20,6 +20,7 @@ func NewMsgCreateMonitoredChain(
 
 ) *MsgCreateMonitoredChain {
 	return &MsgCreateMonitoredChain{
+		Creator:      creator,
 		ChainId:      chainId,
 		ConnectionId: connectionId,
 	}

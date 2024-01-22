@@ -239,9 +239,8 @@ type App struct {
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
 
-	ScopedHealthcheckKeeper capabilitykeeper.ScopedKeeper
-	ScopedMonitoredKeeper   capabilitykeeper.ScopedKeeper
-	MonitoredKeeper         monitoredmodulekeeper.Keeper
+	ScopedMonitoredKeeper capabilitykeeper.ScopedKeeper
+	MonitoredKeeper       monitoredmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -498,6 +497,17 @@ func New(
 		govConfig,
 	)
 
+	scopedMonitoredKeeper := app.CapabilityKeeper.ScopeToModule(monitoredmoduletypes.ModuleName)
+	app.ScopedMonitoredKeeper = scopedMonitoredKeeper
+	app.MonitoredKeeper = *monitoredmodulekeeper.NewKeeper(
+		appCodec,
+		keys[monitoredmoduletypes.StoreKey],
+		keys[monitoredmoduletypes.MemStoreKey],
+		app.GetSubspace(monitoredmoduletypes.ModuleName),
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedMonitoredKeeper,
+	)
 	monitoredModule := monitoredmodule.NewAppModule(appCodec, app.MonitoredKeeper, app.AccountKeeper, app.BankKeeper)
 
 	monitoredIBCModule := monitoredmodule.NewIBCModule(app.MonitoredKeeper)

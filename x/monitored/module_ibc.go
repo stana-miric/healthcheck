@@ -18,8 +18,9 @@ import (
 )
 
 const (
-	DefaultTimeoutInterval uint64 = 2
-	DefaultUpdateInterval  uint64 = 6
+	DefaultTimeoutInterval    uint64 = 20
+	DefaultUpdateInterval     uint64 = 10
+	DefaultPacketSendInterval uint64 = 5
 )
 
 type IBCModule struct {
@@ -169,11 +170,6 @@ func (im IBCModule) OnAcknowledgementPacket(
 	}
 
 	// this line is used by starport scaffolding # oracle/packet/module/ack
-
-	var modulePacketData commonTypes.HealthcheckPacketData
-	if err := modulePacketData.Unmarshal(modulePacket.GetData()); err != nil {
-		return sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error())
-	}
 
 	var eventType string
 

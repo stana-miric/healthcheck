@@ -21,7 +21,7 @@ func (k Keeper) MonitoredChainAll(goCtx context.Context, req *types.QueryAllMoni
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	store := ctx.KVStore(k.storeKey)
-	MonitoredChainStore := prefix.NewStore(store, types.KeyPrefix(types.MonitoredChainKeyPrefix))
+	MonitoredChainStore := prefix.NewStore(store, types.KeyPrefix(string(types.MonitoredChainKeyPrefix)))
 
 	pageRes, err := query.Paginate(MonitoredChainStore, req.Pagination, func(key []byte, value []byte) error {
 		var MonitoredChain types.MonitoredChain

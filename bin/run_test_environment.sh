@@ -196,9 +196,9 @@ sleep 1
 hermes create connection --a-chain $MONITORED_CHAIN_ID --b-chain $REGISTRY_CHAIN_ID
 sleep 1
 
-./$REGISTRY_BINARY tx healthcheck create-chain $MONITORED_CHAIN_ID connection-0 --from $VALIDATOR -y
+./$REGISTRY_BINARY tx healthcheck create-monitored-chains $MONITORED_CHAIN_ID connection-0 --from $VALIDATOR -y
 
-hermes create channel --a-chain $MONITORED_CHAIN_ID --a-connection connection-0 --a-port monitored --b-port healthcheck --channel-version 1 --order ordered
+hermes create channel --a-chain $MONITORED_CHAIN_ID --a-connection connection-0 --a-port monitored --b-port healthcheck --channel-version 1
 sleep 1
 
 hermes start &> ~/.hermes/logs &

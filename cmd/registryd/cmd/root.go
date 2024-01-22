@@ -37,7 +37,7 @@ import (
 	// this line is used by starport scaffolding # root/moduleImport
 
 	appparams "healthcheck/app/params"
-	app "healthcheck/app/register"
+	app "healthcheck/app/registry"
 )
 
 // NewRootCmd creates a new root command for a Cosmos SDK application

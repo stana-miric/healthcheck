@@ -145,7 +145,7 @@ func (k Keeper) GetClientChainIdFromConnection(ctx sdk.Context, connectionID str
 	return chainID, nil
 }
 
-func (k Keeper) OnRecvHealthcheckPacket(ctx sdk.Context, channelID string, packetData commonTypes.HealthcheckPacketData) exported.Acknowledgement {
+func (k Keeper) OnRecvHealthcheckPacket(ctx sdk.Context, channelID string, packetData commonTypes.HealthcheckUpdateData) exported.Acknowledgement {
 	chainID, err := k.GetClientChainIdFromChannel(ctx, channelID)
 	if err != nil {
 		panic(fmt.Errorf("cannot get client id from chainnel: %s", chainID))
@@ -156,8 +156,8 @@ func (k Keeper) OnRecvHealthcheckPacket(ctx sdk.Context, channelID string, packe
 		panic(fmt.Errorf("monitored chain not registered: %s", chainID))
 	}
 
-	chain.Status.Block = packetData.GetHealtcheckUpdate().Block
-	chain.Status.Timestamp = packetData.GetHealtcheckUpdate().Timestamp
+	chain.Status.Block = packetData.Block
+	chain.Status.Timestamp = packetData.Timestamp
 	chain.Status.RegistryBlockHeight = uint64(ctx.BlockHeader().Height)
 	chain.Status.Status = string(types.Active)
 

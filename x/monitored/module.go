@@ -169,7 +169,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, block abci.RequestEndBlock) []abci
 
 	// if update interval is not reached, dont send packets
 	lastChekingBlock, ok := am.keeper.GetLastCheckin(ctx)
-	if ok && lastChekingBlock > uint64(block.Height)-uint64(DefaultUpdateInterval) {
+	if ok && lastChekingBlock > uint64(block.Height)-uint64(DefaultPacketSendInterval) {
 		return []abci.ValidatorUpdate{}
 	}
 

@@ -90,7 +90,7 @@ func (k Keeper) GetLastCheckin(ctx sdk.Context) (uint64, bool) {
 	if bz == nil {
 		return 0, false
 	}
-	return sdk.BigEndianToUint64(bz), false
+	return sdk.BigEndianToUint64(bz), true
 }
 
 // SetLastCheckin sets the the last checkin info

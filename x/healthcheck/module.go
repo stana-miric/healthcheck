@@ -163,19 +163,21 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 	curentBlock := uint64(ctx.BlockHeader().Height)
 
 	for _, chain := range chains {
-		if am.keeper.IsMonitoredChanOpen(ctx, chain.ChainId) {
+		if chain.Status != nil {
 			lastCheckinBlock := chain.Status.RegistryBlockHeight
-			if curentBlock > lastCheckinBlock+chain.UpdateInterval {
-				if curentBlock > lastCheckinBlock+chain.TimeoutInterval+chain.UpdateInterval {
-					channelID, ok := am.keeper.GetChainToChannelMap(ctx, chain.ChainId)
-					if ok {
-						am.keeper.CloseChannel(ctx, channelID)
-						am.keeper.RemoveChanFromChainToChannelMap(ctx, channelID)
+			if am.keeper.IsMonitoredChanOpen(ctx, chain.ChainId) && lastCheckinBlock > 0 {
+				if curentBlock > lastCheckinBlock+chain.UpdateInterval {
+					if curentBlock > lastCheckinBlock+chain.TimeoutInterval+chain.UpdateInterval {
+						channelID, ok := am.keeper.GetChainToChannelMap(ctx, chain.ChainId)
+						if ok {
+							am.keeper.CloseChannel(ctx, channelID)
+							am.keeper.RemoveChanFromChainToChannelMap(ctx, channelID)
+						}
 					}
-				}
 
-				chain.Status.Status = string(types.Inactive)
-				am.keeper.SetMonitoredChain(ctx, chain)
+					chain.Status.Status = string(types.Inactive)
+					am.keeper.SetMonitoredChain(ctx, chain)
+				}
 			}
 		}
 	}

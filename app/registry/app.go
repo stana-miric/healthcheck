@@ -115,7 +115,7 @@ import (
 
 const (
 	AccountAddressPrefix = "cosmos"
-	Name                 = "registe"
+	Name                 = "registry"
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals

@@ -141,7 +141,7 @@ func (im IBCModule) OnRecvPacket(
 
 	// this line is used by starport scaffolding # oracle/packet/module/recv
 
-	var packetData commonTypes.HealthcheckPacketData
+	var packetData commonTypes.HealthcheckUpdateData
 	if err := types.ModuleCdc.UnmarshalJSON(modulePacket.GetData(), &packetData); err != nil {
 		return channeltypes.NewErrorAcknowledgement(sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal packet data: %s", err.Error()))
 	} else {

@@ -6,7 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	app "healthcheck/app/register"
+	app "healthcheck/app/registry"
 	"healthcheck/cmd/registryd/cmd"
 )
 

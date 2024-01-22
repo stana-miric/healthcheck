@@ -20,7 +20,7 @@ var (
 	// HealthcheckChannelKey defines the key to store the channel for communication with the healthcheck chain
 	HealthcheckChannelKey = KeyPrefix("health-check-channel")
 	// LAstCheckinKey defines the key to store the last checkin infromation in the store
-	LastCheckinKey = KeyPrefix("health-check-channel")
+	LastCheckinKey = KeyPrefix("last-checkin")
 )
 
 func KeyPrefix(p string) []byte {
