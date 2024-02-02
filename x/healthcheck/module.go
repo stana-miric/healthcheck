@@ -171,7 +171,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 						channelID, ok := am.keeper.GetChainToChannelMap(ctx, chain.ChainId)
 						if ok {
 							am.keeper.CloseChannel(ctx, channelID)
-							am.keeper.RemoveChanFromChainToChannelMap(ctx, channelID)
+							am.keeper.RemoveChanFromChainToChannelMap(ctx, chain.ChainId)
 						}
 					}
 
